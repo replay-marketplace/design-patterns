@@ -111,3 +111,40 @@ code/
 ## 5. Package_03 - Code Gen
 1. `code_gen(prompt, template)` - Generates a program
 1. `code_gen(prompt)`           - Generates a program
+
+
+
+
+
+
+
+# Code Gen
+
+
+## 2. String Processing
+
+#### Basic
+- `append_string(base: str, addition: str) -> str` - Concatenate strings
+- `search_and_delete(text: str, pattern: str) -> str` - Find and remove
+- `search_and_replace(text: str, old: str, new: str) -> str` - Find and replace
+- `strip_markdown(text: str) -> str` - Remove markdown formatting
+
+#### Analysis
+- `count_tokens(text: str) -> int` - Estimate token count
+
+
+Example dir structure
+```
+code/
+├── pkg_string_processing/                      
+│   ├── package  
+│   │   ├── code
+│   │   │   ├── __init__.py
+│   │   │   ├── function_1.py           # Rename to function names
+│   │   │   ├── function_2.py           # Rename to function names
+│   │   │   └── README.md               # Extreamly simple (install, function signatures)
+│   │   ├── setup.py  
+│   ├── tests/
+│   │   └── test.py 
+│   │   └── ci.yml
+```
