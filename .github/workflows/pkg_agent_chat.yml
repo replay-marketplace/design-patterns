@@ -1,4 +1,4 @@
-name: CI
+name: pck_agent_chat
 
 on:
   push:

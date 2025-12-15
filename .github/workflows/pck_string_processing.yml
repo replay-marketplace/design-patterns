@@ -1,4 +1,4 @@
-name: CI
+name: pck_string_processing
 
 on:
   push:
