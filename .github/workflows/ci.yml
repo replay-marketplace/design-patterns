@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install package
+      run: |
+        cd design_patterns/tools/tool_1/code/pkg_string_processing/package
+        pip install -e .
+    
+    - name: Run tests
+      run: |
+        cd design_patterns/tools/tool_1/code/pkg_string_processing/tests
+        python test.py
+
