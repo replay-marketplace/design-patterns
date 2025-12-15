@@ -121,6 +121,7 @@ code/
 # Code Gen
 
 
+
 ## 2. String Processing
 
 #### Basic
@@ -133,6 +134,16 @@ code/
 - `count_tokens(text: str) -> int` - Estimate token count
 
 
+
+
+
+## 1. Agent Chat
+
+#### Basic:
+- `simple_chat(prompt: str) -> str` - Send prompt, return response
+- `chat_agent_code_config(prompt, system) -> str` - Control randomness, low temp, no max token
+- `chat_agent_code_json(prompt, agent_type)` - Responds only with JSON code; picks system based on agent_type
+
 Example dir structure
 ```
 code/
@@ -142,9 +153,10 @@ code/
 │   │   │   ├── __init__.py
 │   │   │   ├── function_1.py           # Rename to function names
 │   │   │   ├── function_2.py           # Rename to function names
-│   │   │   └── README.md               # Extreamly simple (install, function signatures)
 │   │   ├── setup.py  
 │   ├── tests/
 │   │   └── test.py 
-│   │   └── ci.yml
+│   └── README.md               # Extreamly simple (install, function signatures)
 ```
+
+Also make .github/workflows/pkg_agent_chat.yml  

@@ -25,11 +25,11 @@ jobs:
     
     - name: Install package
       run: |
-        cd package
+        cd design_patterns/tools/tool_1/code/pkg_agent_chat/package
         pip install -e .
     
     - name: Run tests
       run: |
-        cd tests
+        cd design_patterns/tools/tool_1/code/pkg_agent_chat/tests
         python test.py
 
