@@ -3,8 +3,35 @@ Store JSON to directory function - Store JSON structure to directory.
 """
 
 import os
+import sys
+import importlib.util
 from pathlib import Path
-from pkg_file_processing.code.save_text_to_file import save_text_to_file
+
+# Import from pkg_file_processing - handle both development and installed scenarios
+def _import_save_text_to_file():
+    """Import save_text_to_file from pkg_file_processing."""
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    pkg_file_path = os.path.join(
+        current_dir, '..', '..', '..', 'pkg_file_processing', 'package', 'code', 'save_text_to_file.py'
+    )
+    pkg_file_path = os.path.abspath(pkg_file_path)
+    
+    if os.path.exists(pkg_file_path):
+        spec = importlib.util.spec_from_file_location("save_text_to_file", pkg_file_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module.save_text_to_file
+    else:
+        pkg_file_processing_path = os.path.join(
+            current_dir, '..', '..', '..', 'pkg_file_processing', 'package'
+        )
+        pkg_file_processing_path = os.path.abspath(pkg_file_processing_path)
+        if pkg_file_processing_path not in sys.path:
+            sys.path.insert(0, pkg_file_processing_path)
+        from code.save_text_to_file import save_text_to_file
+        return save_text_to_file
+
+save_text_to_file = _import_save_text_to_file()
 
 
 def store_json_to_directory(json_data: dict, target_directory: str) -> bool:

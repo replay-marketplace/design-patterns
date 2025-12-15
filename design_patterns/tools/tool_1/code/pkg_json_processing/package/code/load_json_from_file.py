@@ -3,7 +3,37 @@ Load JSON from file function - Load JSON from file.
 """
 
 import json
-from pkg_file_processing.code.read_file_content import read_file_content
+import sys
+import os
+import importlib.util
+
+# Import from pkg_file_processing - handle both development and installed scenarios
+def _import_read_file_content():
+    """Import read_file_content from pkg_file_processing."""
+    # Try relative path first (development mode)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    pkg_file_path = os.path.join(
+        current_dir, '..', '..', '..', 'pkg_file_processing', 'package', 'code', 'read_file_content.py'
+    )
+    pkg_file_path = os.path.abspath(pkg_file_path)
+    
+    if os.path.exists(pkg_file_path):
+        spec = importlib.util.spec_from_file_location("read_file_content", pkg_file_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module.read_file_content
+    else:
+        # Try installed package (when packages are installed via pip)
+        pkg_file_processing_path = os.path.join(
+            current_dir, '..', '..', '..', 'pkg_file_processing', 'package'
+        )
+        pkg_file_processing_path = os.path.abspath(pkg_file_processing_path)
+        if pkg_file_processing_path not in sys.path:
+            sys.path.insert(0, pkg_file_processing_path)
+        from code.read_file_content import read_file_content
+        return read_file_content
+
+read_file_content = _import_read_file_content()
 
 
 def load_json_from_file(filepath: str) -> dict:
