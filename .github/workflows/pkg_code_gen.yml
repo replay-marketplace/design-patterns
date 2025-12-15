@@ -37,6 +37,8 @@ jobs:
         pip install -e .
     
     - name: Run tests
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         cd design_patterns/tools/tool_1/code/pkg_code_gen/tests
         python test.py
