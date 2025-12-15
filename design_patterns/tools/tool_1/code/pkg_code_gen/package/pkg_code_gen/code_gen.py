@@ -12,28 +12,38 @@ def _import_chat_agent_code_json():
     """Import chat_agent_code_json from pkg_agent_chat."""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     pkg_path = os.path.join(
-        current_dir, '..', '..', '..', '..', 'pkg_agent_chat', 'package', 'code', 'chat_agent_code_json.py'
+        current_dir, '..', '..', '..', 'pkg_agent_chat', 'package', 'code', 'chat_agent_code_json.py'
     )
     pkg_path = os.path.abspath(pkg_path)
     
     if os.path.exists(pkg_path):
+        # Development mode: load directly from file path
         spec = importlib.util.spec_from_file_location("chat_agent_code_json", pkg_path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         return module.chat_agent_code_json
     else:
+        # Try installed package import first
         try:
             from pkg_agent_chat.code.chat_agent_code_json import chat_agent_code_json
             return chat_agent_code_json
         except ImportError:
+            # Fallback: try adding package directory to path
             pkg_dir = os.path.join(
-                current_dir, '..', '..', '..', '..', 'pkg_agent_chat', 'package'
+                current_dir, '..', '..', '..', 'pkg_agent_chat', 'package'
             )
             pkg_dir = os.path.abspath(pkg_dir)
-            if pkg_dir not in sys.path:
+            if os.path.exists(pkg_dir) and pkg_dir not in sys.path:
                 sys.path.insert(0, pkg_dir)
-            from code.chat_agent_code_json import chat_agent_code_json
-            return chat_agent_code_json
+            try:
+                from code.chat_agent_code_json import chat_agent_code_json
+                return chat_agent_code_json
+            except ImportError:
+                raise ImportError(
+                    f"Could not import chat_agent_code_json from pkg_agent_chat. "
+                    f"Tried: {pkg_path} and package import. "
+                    f"Please ensure pkg_agent_chat is installed or available."
+                )
 
 chat_agent_code_json = _import_chat_agent_code_json()
 
@@ -43,7 +53,7 @@ def _import_file_functions():
     """Import file functions from pkg_file_processing."""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     pkg_path = os.path.join(
-        current_dir, '..', '..', '..', '..', 'pkg_file_processing', 'package', 'code'
+        current_dir, '..', '..', '..', 'pkg_file_processing', 'package', 'code'
     )
     pkg_path = os.path.abspath(pkg_path)
     
@@ -51,6 +61,7 @@ def _import_file_functions():
     func_names = ['dir_exists', 'file_exists', 'save_text_to_file', 'read_file_content']
     
     if os.path.exists(pkg_path):
+        # Development mode: load directly from file paths
         for func_name in func_names:
             func_path = os.path.join(pkg_path, f'{func_name}.py')
             if os.path.exists(func_path):
@@ -59,6 +70,7 @@ def _import_file_functions():
                 spec.loader.exec_module(module)
                 functions[func_name] = getattr(module, func_name)
     else:
+        # Try installed package import first
         try:
             from pkg_file_processing.code import dir_exists, file_exists, save_text_to_file, read_file_content
             functions = {
@@ -68,19 +80,27 @@ def _import_file_functions():
                 'read_file_content': read_file_content
             }
         except ImportError:
+            # Fallback: try adding package directory to path
             pkg_dir = os.path.join(
-                current_dir, '..', '..', '..', '..', 'pkg_file_processing', 'package'
+                current_dir, '..', '..', '..', 'pkg_file_processing', 'package'
             )
             pkg_dir = os.path.abspath(pkg_dir)
-            if pkg_dir not in sys.path:
+            if os.path.exists(pkg_dir) and pkg_dir not in sys.path:
                 sys.path.insert(0, pkg_dir)
-            from code import dir_exists, file_exists, save_text_to_file, read_file_content
-            functions = {
-                'dir_exists': dir_exists,
-                'file_exists': file_exists,
-                'save_text_to_file': save_text_to_file,
-                'read_file_content': read_file_content
-            }
+            try:
+                from code import dir_exists, file_exists, save_text_to_file, read_file_content
+                functions = {
+                    'dir_exists': dir_exists,
+                    'file_exists': file_exists,
+                    'save_text_to_file': save_text_to_file,
+                    'read_file_content': read_file_content
+                }
+            except ImportError:
+                raise ImportError(
+                    f"Could not import functions from pkg_file_processing. "
+                    f"Tried: {pkg_path} and package import. "
+                    f"Please ensure pkg_file_processing is installed or available."
+                )
     
     return functions
 
@@ -96,7 +116,7 @@ def _import_json_functions():
     """Import JSON functions from pkg_json_processing."""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     pkg_path = os.path.join(
-        current_dir, '..', '..', '..', '..', 'pkg_json_processing', 'package', 'code'
+        current_dir, '..', '..', '..', 'pkg_json_processing', 'package', 'code'
     )
     pkg_path = os.path.abspath(pkg_path)
     
@@ -104,6 +124,7 @@ def _import_json_functions():
     func_names = ['load_directory_to_json', 'store_json_to_directory', 'dict_to_json_string']
     
     if os.path.exists(pkg_path):
+        # Development mode: load directly from file paths
         for func_name in func_names:
             func_path = os.path.join(pkg_path, f'{func_name}.py')
             if os.path.exists(func_path):
@@ -112,6 +133,7 @@ def _import_json_functions():
                 spec.loader.exec_module(module)
                 functions[func_name] = getattr(module, func_name)
     else:
+        # Try installed package import first
         try:
             from pkg_json_processing.code import load_directory_to_json, store_json_to_directory, dict_to_json_string
             functions = {
@@ -120,18 +142,26 @@ def _import_json_functions():
                 'dict_to_json_string': dict_to_json_string
             }
         except ImportError:
+            # Fallback: try adding package directory to path
             pkg_dir = os.path.join(
-                current_dir, '..', '..', '..', '..', 'pkg_json_processing', 'package'
+                current_dir, '..', '..', '..', 'pkg_json_processing', 'package'
             )
             pkg_dir = os.path.abspath(pkg_dir)
-            if pkg_dir not in sys.path:
+            if os.path.exists(pkg_dir) and pkg_dir not in sys.path:
                 sys.path.insert(0, pkg_dir)
-            from code import load_directory_to_json, store_json_to_directory, dict_to_json_string
-            functions = {
-                'load_directory_to_json': load_directory_to_json,
-                'store_json_to_directory': store_json_to_directory,
-                'dict_to_json_string': dict_to_json_string
-            }
+            try:
+                from code import load_directory_to_json, store_json_to_directory, dict_to_json_string
+                functions = {
+                    'load_directory_to_json': load_directory_to_json,
+                    'store_json_to_directory': store_json_to_directory,
+                    'dict_to_json_string': dict_to_json_string
+                }
+            except ImportError:
+                raise ImportError(
+                    f"Could not import functions from pkg_json_processing. "
+                    f"Tried: {pkg_path} and package import. "
+                    f"Please ensure pkg_json_processing is installed or available."
+                )
     
     return functions
 
