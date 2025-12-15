@@ -1,0 +1,37 @@
+name: pkg_json_processing
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        cd design_patterns/tools/tool_1/code/pkg_file_processing/package
+        pip install -e .
+        cd ../../pkg_json_processing/package
+        pip install -e .
+    
+    - name: Run tests
+      run: |
+        cd design_patterns/tools/tool_1/code/pkg_json_processing/tests
+        python test.py
+

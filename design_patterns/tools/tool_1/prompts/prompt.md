@@ -115,6 +115,19 @@ code/
 
 
 
+# Hiarchy of Packages
+
+## Level 2 - bottom
+Code Gen
+
+## Level 1 - bottom
+1. JSON processing
+
+## Level 0 - bottom
+1. string processing    design_patterns/tools/tool_1/code/pkg_string_processing/README.md
+2. agent chat           design_patterns/tools/tool_1/code/pkg_agent_chat/README.md
+3. file processing      design_patterns/tools/tool_1/code/pkg_file_processing/README.md
+
 
 
 
@@ -144,6 +157,18 @@ code/
 - `chat_agent_code_config(prompt, system) -> str` - Control randomness, low temp, no max token
 - `chat_agent_code_json(prompt, agent_type)` - Responds only with JSON code; picks system based on agent_type
 
+
+
+
+## 3. File Processing
+
+- `save_text_to_file(content: str, directory: str, filename: str) -> bool` - Write text file
+- `read_file_content(filepath: str) -> str` - Read single file
+- `create_directory_structure(structure: dict) -> bool` - Create nested directories
+- `file_exists(filepath: str) -> bool` - Check existence
+- `dir_exists(filepath: str) -> bool` - Check existence
+
+
 Example dir structure
 ```
 code/
@@ -159,4 +184,5 @@ code/
 │   └── README.md               # Extreamly simple (install, function signatures)
 ```
 
-Also make .github/workflows/pkg_agent_chat.yml  
+Also make .github/workflows/pkg_agent_chat.yml, the name of the workflow should be same as file name. 
+
