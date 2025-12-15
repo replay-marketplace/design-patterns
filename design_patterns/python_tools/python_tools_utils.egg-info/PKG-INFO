@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: python_tools_utils
+Version: 0.1.0
+Summary: A local utility package with simple math functions
+Author: Your Name
+Requires-Python: >=3.7
+Dynamic: author
+Dynamic: requires-python
+Dynamic: summary

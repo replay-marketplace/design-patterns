@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .button-with-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .button-with-input button {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 250px;
+            min-width: 150px;
+        }
+        
+        .button-with-input input {
+            flex: 1;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .button-with-input input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            width: 100%;
+            max-width: 250px;
+            min-width: 150px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            min-height: 20px;
+        }
+        
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Button Interface</h1>
+        <div class="button-grid">
+            <button onclick="handleClick(1)">Record</button>
+            <button onclick="handleClick(2)">Send Prompt</button>
+            <div class="button-with-input">
+                <button onclick="handleClick(3)">Make New Project</button>
+                <input type="text" id="folderName" placeholder="Enter folder name">
+            </div>
+            <button onclick="handleClick(4)">Add</button>
+            <button onclick="handleClick(5)">Save prompt</button>
+            <button onclick="handleClick(6)">Button 6</button>
+            <button onclick="handleClick(7)">Button 7</button>
+            <button onclick="handleClick(8)">Button 8</button>
+            <button onclick="handleClick(9)">Button 9</button>
+            <button onclick="handleClick(10)">Button 10</button>
+        </div>
+        <div id="status" class="status"></div>
+    </div>
+    
+    <script>
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let isRecording = false;
+        let audioStream = null;
+        let transcribedText = null; // Store transcribed text from button 1
+
+        async function startRecording() {
+            try {
+                audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(audioStream, {
+                    mimeType: 'audio/webm;codecs=opus'
+                });
+                
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+                
+                mediaRecorder.start();
+                isRecording = true;
+                return true;
+            } catch (error) {
+                console.error('Error accessing microphone:', error);
+                throw new Error('Could not access microphone. Please grant microphone permissions.');
+            }
+        }
+
+        function stopRecording() {
+            return new Promise((resolve) => {
+                if (mediaRecorder && isRecording) {
+                    mediaRecorder.onstop = () => {
+                        isRecording = false;
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        // Stop all tracks
+                        if (audioStream) {
+                            audioStream.getTracks().forEach(track => track.stop());
+                            audioStream = null;
+                        }
+                        resolve(audioBlob);
+                    };
+                    mediaRecorder.stop();
+                } else {
+                    resolve(null);
+                }
+            });
+        }
+
+        async function convertToMP3(audioBlob) {
+            // For simplicity, we'll send the webm file directly
+            // OpenAI Whisper API supports webm format, so conversion isn't strictly necessary
+            // But if you need MP3, you'd need a library like lamejs or do server-side conversion
+            return audioBlob;
+        }
+
+        async function handleClick(buttonNumber) {
+            const statusDiv = document.getElementById('status');
+            const button = event.target;
+            
+            // Special handling for button 1 - record audio
+            if (buttonNumber === 1) {
+                if (!isRecording) {
+                    // Start recording
+                    try {
+                        button.disabled = false; // Keep enabled so user can click to stop
+                        button.textContent = 'Stop Recording';
+                        statusDiv.textContent = 'Recording... Click button again to stop.';
+                        statusDiv.className = 'status';
+                        await startRecording();
+                    } catch (error) {
+                        statusDiv.textContent = `Error: ${error.message}`;
+                        statusDiv.className = 'status error';
+                        button.textContent = 'Record';
+                    }
+                } else {
+                    // Stop recording and process
+                    button.disabled = true;
+                    button.textContent = 'Processing...';
+                    statusDiv.textContent = 'Processing audio...';
+                    
+                    try {
+                        const audioBlob = await stopRecording();
+                        
+                        if (!audioBlob) {
+                            throw new Error('No audio recorded');
+                        }
+                        
+                        // Convert to MP3 (or use webm directly)
+                        const audioFile = await convertToMP3(audioBlob);
+                        
+                        // Send to server
+                        const formData = new FormData();
+                        formData.append('audio', audioFile, 'recording.webm');
+                        
+                        const response = await fetch(`/button${buttonNumber}`, {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            // Store the transcribed text for button 2
+                            transcribedText = data.text || '';
+                            statusDiv.textContent = `Transcription: ${transcribedText}`;
+                            statusDiv.className = 'status success';
+                        } else {
+                            throw new Error(data.message || 'An error occurred');
+                        }
+                    } catch (error) {
+                        statusDiv.textContent = `Error: ${error.message}`;
+                        statusDiv.className = 'status error';
+                    } finally {
+                        button.disabled = false;
+                        button.textContent = 'Record';
+                    }
+                }
+            } else if (buttonNumber === 2) {
+                // Special handling for button 2 - send transcribed text to Anthropic
+                button.disabled = true;
+                statusDiv.textContent = 'Sending to Anthropic...';
+                statusDiv.className = 'status';
+                
+                try {
+                    if (!transcribedText) {
+                        throw new Error('No transcribed text available. Please record audio first using the Record button.');
+                    }
+                    
+                    const response = await fetch(`/button${buttonNumber}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ text: transcribedText })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        statusDiv.textContent = `Anthropic Response: ${data.response || data.message}`;
+                        statusDiv.className = 'status success';
+                    } else {
+                        throw new Error(data.message || 'An error occurred');
+                    }
+                } catch (error) {
+                    statusDiv.textContent = `Error: ${error.message}`;
+                    statusDiv.className = 'status error';
+                } finally {
+                    button.disabled = false;
+                }
+            } else if (buttonNumber === 3) {
+                // Special handling for button 3 - create folder
+                button.disabled = true;
+                statusDiv.textContent = 'Creating folder...';
+                statusDiv.className = 'status';
+                
+                try {
+                    const folderNameInput = document.getElementById('folderName');
+                    const folderName = folderNameInput.value.trim();
+                    
+                    if (!folderName) {
+                        throw new Error('Please enter a folder name.');
+                    }
+                    
+                    const response = await fetch(`/button${buttonNumber}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ folderName: folderName })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        statusDiv.textContent = data.message || `Folder created successfully!`;
+                        statusDiv.className = 'status success';
+                    } else {
+                        throw new Error(data.message || 'An error occurred');
+                    }
+                } catch (error) {
+                    statusDiv.textContent = `Error: ${error.message}`;
+                    statusDiv.className = 'status error';
+                } finally {
+                    button.disabled = false;
+                }
+            } else if (buttonNumber === 5) {
+                // Special handling for button 5 - save prompt
+                button.disabled = true;
+                statusDiv.textContent = 'Saving prompt...';
+                statusDiv.className = 'status';
+                
+                try {
+                    if (!transcribedText) {
+                        throw new Error('No transcribed text available. Please record audio first using the Record button.');
+                    }
+                    
+                    const response = await fetch(`/button${buttonNumber}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ text: transcribedText })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        statusDiv.textContent = data.message || `Prompt saved successfully!`;
+                        statusDiv.className = 'status success';
+                    } else {
+                        throw new Error(data.message || 'An error occurred');
+                    }
+                } catch (error) {
+                    statusDiv.textContent = `Error: ${error.message}`;
+                    statusDiv.className = 'status error';
+                } finally {
+                    button.disabled = false;
+                }
+            } else {
+                // Original behavior for other buttons
+                button.disabled = true;
+                statusDiv.textContent = `Processing Button ${buttonNumber}...`;
+                statusDiv.className = 'status';
+                
+                try {
+                    const response = await fetch(`/button${buttonNumber}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        statusDiv.textContent = data.message || `Button ${buttonNumber} clicked successfully!`;
+                        statusDiv.className = 'status success';
+                    } else {
+                        throw new Error(data.message || 'An error occurred');
+                    }
+                } catch (error) {
+                    statusDiv.textContent = `Error: ${error.message}`;
+                    statusDiv.className = 'status error';
+                } finally {
+                    button.disabled = false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
