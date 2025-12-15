@@ -125,8 +125,8 @@ Code Gen
 
 ## Level 0 - bottom
 1. string processing    design_patterns/tools/tool_1/code/pkg_string_processing/README.md
-2. agent chat           design_patterns/tools/tool_1/code/pkg_agent_chat/README.md
-3. file processing      design_patterns/tools/tool_1/code/pkg_file_processing/README.md
+2. file processing      design_patterns/tools/tool_1/code/pkg_file_processing/README.md
+3. agent chat           design_patterns/tools/tool_1/code/pkg_agent_chat/README.md
 
 
 
@@ -169,12 +169,48 @@ Code Gen
 - `dir_exists(filepath: str) -> bool` - Check existence
 
 
+
+
+
+
+# ---------------------------------
+
+
+
+## 4. JSON Processing
+
+#### Basic:       File / Dict / String  / Helper
+- `load_json_from_file(filepath: str) -> dict` - Load JSON from file
+- `save_json_to_file(data: dict, filepath: str) -> bool` - Save JSON to file
+- `dict_to_json_string(data: dict, pretty: bool) -> str` - Convert dict to JSON string
+- `parse_json_string(json_str: str) -> dict` - Parse JSON string to dict
+- `load_json_string_from_file(filepath: str) -> str` - Load JSON string from file
+- `save_json_string_to_file(json_str: str, filepath: str) -> bool` - Save JSON string to file
+- `validate_json_schema(data: dict, schema: dict) -> bool` - Validate structure
+
+#### Getters / Setters
+- `get_json_dir_example()` - Returns an example of the json_dir file
+- `get_json_dir_schema()` - Returns the schema of the json_dir file
+- `generate_json_schema_from_json(input_json_file)` - Saves to the same location
+
+#### Advanced
+- `load_directory_to_json(directory: str) -> dict` - Directory to JSON, always recursive
+- `store_json_to_directory()`
+
+
+
+Use these available python packages:
+1. String Processing: design_patterns/tools/tool_1/code/pkg_string_processing/README.md
+2. File Processing: design_patterns/tools/tool_1/code/pkg_file_processing/README.md
+
+
+
 Example dir structure
 ```
 code/
 ├── pkg_string_processing/                      
 │   ├── package  
-│   │   ├── code
+│   │   ├── pkg_string_processing        # Package name, NOT "code" (avoids namespace conflicts)
 │   │   │   ├── __init__.py
 │   │   │   ├── function_1.py           # Rename to function names
 │   │   │   ├── function_2.py           # Rename to function names
@@ -184,5 +220,11 @@ code/
 │   └── README.md               # Extreamly simple (install, function signatures)
 ```
 
-Also make .github/workflows/pkg_agent_chat.yml, the name of the workflow should be same as file name. 
+**IMPORTANT**: The package directory must be named after the package (e.g., `pkg_string_processing/`), NOT `code/`. This ensures:
+- Unique namespaces for each package
+- Direct imports work: `from pkg_file_processing import read_file_content`
+- No namespace conflicts between packages
+- `find_packages()` correctly identifies package names
+
+Also make .github/workflows/pkg_json_processing.yml, the name of the workflow should be same as file name. 
 
