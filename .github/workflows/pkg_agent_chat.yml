@@ -30,7 +30,7 @@ jobs:
     
     - name: Run tests
       env:
-        OPENAI_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       run: |
         cd design_patterns/tools/tool_1/code/pkg_agent_chat/tests
         python test.py
