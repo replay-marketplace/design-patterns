@@ -24,7 +24,16 @@ sys.path.insert(0, package_path)
 
 from pkg_code_gen import code_gen
 
+def main():
+    code_gen_dir = os.path.join(current_dir, "generated_code")
+    result_path = code_gen(
+        prompt="hello world in c++",
+        code_gen_dir_path=code_gen_dir,
+        project_name="test")
 
+
+
+'''
 def parse_prompt_list(file_path):
     """Parse prompt_list.txt and return list of (project_name, prompt) tuples."""
     projects = []
@@ -116,3 +125,4 @@ def main():
 if __name__ == "__main__":
     main()
 
+'''
