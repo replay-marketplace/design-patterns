@@ -51,7 +51,7 @@ def chat_agent_code_json(prompt: str, agent_type: str = "code") -> dict:
     system_message = _get_system_message(agent_type)
 
     response = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
+        model="claude-sonnet-4-5-20250929",
         max_tokens=4096,
         system=system_message,
         messages=[
