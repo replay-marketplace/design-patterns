@@ -4,7 +4,7 @@ Chat agent code JSON function - Responds only with JSON code; picks system based
 
 import os
 import json
-from openai import OpenAI
+from anthropic import Anthropic
 
 
 def _get_system_message(agent_type: str) -> str:
@@ -43,40 +43,24 @@ def chat_agent_code_json(prompt: str, agent_type: str = "code") -> dict:
         >>> print(response)
         {'function': 'def example():', 'description': '...'}
     """
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        raise ValueError("OPENAI_API_KEY environment variable is not set")
+        raise ValueError("ANTHROPIC_API_KEY environment variable is not set")
 
-    client = OpenAI(api_key=api_key)
+    client = Anthropic(api_key=api_key)
     system_message = _get_system_message(agent_type)
 
-    # Try with response_format first, fallback if not supported
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": system_message},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.1,  # Low temperature for deterministic responses
-            response_format={"type": "json_object"}  # Force JSON response
-        )
-    except Exception as e:
-        # If response_format is not supported, retry without it
-        error_str = str(e)
-        if "response_format" in error_str.lower() or "json_object" in error_str.lower():
-            response = client.chat.completions.create(
-                model="gpt-4",
-                messages=[
-                    {"role": "system", "content": system_message},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.1  # Low temperature for deterministic responses
-            )
-        else:
-            raise
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=4096,
+        system=system_message,
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.1,  # Low temperature for deterministic responses
+    )
 
-    response_text = response.choices[0].message.content
+    response_text = response.content[0].text
     
     try:
         return json.loads(response_text)

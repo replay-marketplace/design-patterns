@@ -3,7 +3,7 @@ Simple chat function - Send prompt, return response.
 """
 
 import os
-from openai import OpenAI
+from anthropic import Anthropic
 
 
 def simple_chat(prompt: str) -> str:
@@ -21,18 +21,19 @@ def simple_chat(prompt: str) -> str:
         >>> print(response)
         'Python is a programming language...'
     """
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        raise ValueError("OPENAI_API_KEY environment variable is not set")
+        raise ValueError("ANTHROPIC_API_KEY environment variable is not set")
 
-    client = OpenAI(api_key=api_key)
+    client = Anthropic(api_key=api_key)
 
-    response = client.chat.completions.create(
-        model="gpt-4",
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=1024,
         messages=[
             {"role": "user", "content": prompt}
         ]
     )
 
-    return response.choices[0].message.content
+    return response.content[0].text
 

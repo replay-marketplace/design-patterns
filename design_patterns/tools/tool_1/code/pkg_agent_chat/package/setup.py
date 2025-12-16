@@ -32,7 +32,7 @@ setup(
     ],
     python_requires=">=3.8",
     install_requires=[
-        "openai>=1.0.0",
+        "anthropic>=0.18.0",
     ],
 )
 

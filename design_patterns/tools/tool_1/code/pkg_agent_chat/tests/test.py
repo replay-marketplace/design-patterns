@@ -16,8 +16,8 @@ from code.chat_agent_code_json import chat_agent_code_json
 def test_simple_chat():
     """Test simple_chat function."""
     # Require API key to be set
-    if not os.getenv("OPENAI_API_KEY"):
-        raise ValueError("OPENAI_API_KEY environment variable is required but not set")
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        raise ValueError("ANTHROPIC_API_KEY environment variable is required but not set")
     
     try:
         response = simple_chat("Say 'Hello, World!' in one sentence.")
@@ -31,8 +31,8 @@ def test_simple_chat():
 def test_chat_agent_code_config():
     """Test chat_agent_code_config function."""
     # Require API key to be set
-    if not os.getenv("OPENAI_API_KEY"):
-        raise ValueError("OPENAI_API_KEY environment variable is required but not set")
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        raise ValueError("ANTHROPIC_API_KEY environment variable is required but not set")
     
     try:
         system_msg = "You are a helpful coding assistant."
@@ -47,8 +47,8 @@ def test_chat_agent_code_config():
 def test_chat_agent_code_json():
     """Test chat_agent_code_json function."""
     # Require API key to be set
-    if not os.getenv("OPENAI_API_KEY"):
-        raise ValueError("OPENAI_API_KEY environment variable is required but not set")
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        raise ValueError("ANTHROPIC_API_KEY environment variable is required but not set")
     
     try:
         response = chat_agent_code_json("Return a JSON object with key 'status' and value 'ok'", "code")

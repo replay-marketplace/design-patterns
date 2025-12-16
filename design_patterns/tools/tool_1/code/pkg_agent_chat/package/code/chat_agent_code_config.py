@@ -3,7 +3,7 @@ Chat agent code config function - Control randomness, low temp, no max token.
 """
 
 import os
-from openai import OpenAI
+from anthropic import Anthropic
 
 
 def chat_agent_code_config(prompt: str, system: str) -> str:
@@ -24,21 +24,21 @@ def chat_agent_code_config(prompt: str, system: str) -> str:
         >>> print(response)
         'def hello_world():\\n    print("Hello, World!")'
     """
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        raise ValueError("OPENAI_API_KEY environment variable is not set")
+        raise ValueError("ANTHROPIC_API_KEY environment variable is not set")
 
-    client = OpenAI(api_key=api_key)
+    client = Anthropic(api_key=api_key)
 
-    response = client.chat.completions.create(
-        model="gpt-4",
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=4096,  # Large max_tokens to allow full response
+        system=system,
         messages=[
-            {"role": "system", "content": system},
             {"role": "user", "content": prompt}
         ],
         temperature=0.1,  # Low temperature for deterministic code generation
-        # No max_tokens specified to allow full response
     )
 
-    return response.choices[0].message.content
+    return response.content[0].text
 
