@@ -1,1 +1,0 @@
-Message queue code for microservice3
