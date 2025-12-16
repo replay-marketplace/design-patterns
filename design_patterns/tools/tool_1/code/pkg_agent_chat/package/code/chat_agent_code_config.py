@@ -31,7 +31,7 @@ def chat_agent_code_config(prompt: str, system: str) -> str:
     client = Anthropic(api_key=api_key)
 
     response = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
+        model="claude-sonnet-4-5-20250929",
         max_tokens=4096,  # Large max_tokens to allow full response
         system=system,
         messages=[

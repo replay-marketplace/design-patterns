@@ -31,6 +31,8 @@ def main():
         code_gen_dir_path=code_gen_dir,
         project_name="test")
 
+    print (result_path)
+
 
 
 '''
