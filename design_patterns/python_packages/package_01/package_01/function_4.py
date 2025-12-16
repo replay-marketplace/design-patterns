@@ -32,3 +32,4 @@ def function_four(items: list, reverse: bool = False) -> list:
     
     return result
 
+

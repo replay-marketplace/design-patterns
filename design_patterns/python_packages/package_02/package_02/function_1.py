@@ -27,3 +27,4 @@ def function_one(name: str, greeting: str = "Hello") -> str:
     """
     return format_text(name, prefix=f"{greeting} ", suffix="!")
 
+

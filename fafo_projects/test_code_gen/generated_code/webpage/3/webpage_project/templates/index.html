@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Webpage Grid</title>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+.grid-item {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+}
+.grid-item input {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.grid-item iframe {
+  width: 100%;
+  height: 1000px;
+  border: 1px solid #ccc;
+}
+</style>
+</head>
+<body>
+<div class='grid-container'>
+  <div class='grid-item'>
+    <input type='text' id='url1' placeholder='Enter URL here'>
+    <iframe src='' id='frame1'></iframe>
+  </div>
+  <div class='grid-item'>
+    <input type='text' id='url2' placeholder='Enter URL here'>
+    <iframe src='' id='frame2'></iframe>
+  </div>
+  <div class='grid-item'>
+    <input type='text' id='url3' placeholder='Enter URL here'>
+    <iframe src='' id='frame3'></iframe>
+  </div>
+  <div class='grid-item'>
+    <input type='text' id='url4' placeholder='Enter URL here'>
+    <iframe src='' id='frame4'></iframe>
+  </div>
+</div>
+<script>
+  document.getElementById('url1').addEventListener('change', function() {
+    document.getElementById('frame1').src = this.value;
+  });
+  document.getElementById('url2').addEventListener('change', function() {
+    document.getElementById('frame2').src = this.value;
+  });
+  document.getElementById('url3').addEventListener('change', function() {
+    document.getElementById('frame3').src = this.value;
+  });
+  document.getElementById('url4').addEventListener('change', function() {
+    document.getElementById('frame4').src = this.value;
+  });
+</script>
+</body>
+</html>

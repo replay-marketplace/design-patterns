@@ -27,3 +27,4 @@ def function_five(days: int = 0) -> str:
     target_date = datetime.now() + timedelta(days=days)
     return target_date.strftime("%Y-%m-%d")
 
+

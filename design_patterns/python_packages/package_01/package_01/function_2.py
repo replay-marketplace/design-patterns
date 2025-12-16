@@ -24,3 +24,4 @@ def function_two(numbers: list[int | float]) -> float:
         raise ValueError("Cannot calculate average of an empty list")
     return sum(numbers) / len(numbers)
 
+

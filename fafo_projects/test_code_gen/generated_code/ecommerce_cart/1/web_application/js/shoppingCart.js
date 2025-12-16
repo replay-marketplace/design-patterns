@@ -1,0 +1,1 @@
+var cart = []; function addToCart(item) { cart.push(item); } function removeFromCart(item) { var index = cart.indexOf(item); if (index > -1) { cart.splice(index, 1); } }
