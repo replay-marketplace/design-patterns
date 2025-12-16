@@ -4,6 +4,7 @@ Chat agent code JSON function - Responds only with JSON code; picks system based
 
 import os
 import json
+import re
 from anthropic import Anthropic
 
 
@@ -24,6 +25,22 @@ def _get_system_message(agent_type: str) -> str:
         "default": "You are a helpful assistant. Always respond with valid JSON only. Your responses must be valid JSON objects."
     }
     return system_messages.get(agent_type.lower(), system_messages["default"])
+
+
+def _strip_markdown_code_fences(text: str) -> str:
+    """
+    Strip markdown code fences (```json ... ``` or ``` ... ```) from text.
+    
+    Args:
+        text: The text that may contain markdown code fences.
+        
+    Returns:
+        The text with markdown code fences removed.
+    """
+    # Remove markdown code fences (```json, ```, etc.)
+    text = re.sub(r'^```(?:json)?\s*\n', '', text, flags=re.MULTILINE)
+    text = re.sub(r'\n```\s*$', '', text, flags=re.MULTILINE)
+    return text.strip()
 
 
 def chat_agent_code_json(prompt: str, agent_type: str = "code") -> dict:
@@ -61,6 +78,9 @@ def chat_agent_code_json(prompt: str, agent_type: str = "code") -> dict:
     )
 
     response_text = response.content[0].text
+    
+    # Strip markdown code fences if present
+    response_text = _strip_markdown_code_fences(response_text)
     
     try:
         return json.loads(response_text)
