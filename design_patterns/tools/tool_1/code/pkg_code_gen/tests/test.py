@@ -16,9 +16,9 @@ from pkg_code_gen import code_gen
 
 def test_code_gen_basic():
     """Test basic code generation without template."""
-    # This test requires OPENAI_API_KEY to be set
-    if not os.getenv("OPENAI_API_KEY"):
-        raise ValueError("OPENAI_API_KEY environment variable is required but not set")
+    # This test requires ANTHROPIC_API_KEY to be set
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        raise ValueError("ANTHROPIC_API_KEY environment variable is required but not set")
     
     with tempfile.TemporaryDirectory() as tmpdir:
         code_gen_dir = os.path.join(tmpdir, "code_gen")
@@ -47,9 +47,9 @@ def test_code_gen_basic():
 
 def test_code_gen_with_template():
     """Test code generation with template."""
-    # This test requires OPENAI_API_KEY to be set
-    if not os.getenv("OPENAI_API_KEY"):
-        raise ValueError("OPENAI_API_KEY environment variable is required but not set")
+    # This test requires ANTHROPIC_API_KEY to be set
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        raise ValueError("ANTHROPIC_API_KEY environment variable is required but not set")
     
     with tempfile.TemporaryDirectory() as tmpdir:
         code_gen_dir = os.path.join(tmpdir, "code_gen")
