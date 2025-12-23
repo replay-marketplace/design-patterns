@@ -1,0 +1,128 @@
+# Agent Chat Package
+
+A Python package for interacting with Anthropic AI's Claude API with specialized chat agent functions.
+
+## Installation
+
+```bash
+cd agent_chat_pkg
+pip install -e .
+```
+
+## Setup
+
+You need to set your Anthropic API key as an environment variable:
+
+```bash
+export ANTHROPIC_API_KEY='your-api-key-here'
+```
+
+Or create a `.env` file in your project root:
+
+```
+ANTHROPIC_API_KEY=your-api-key-here
+```
+
+## Usage
+
+```python
+from agent_chat import simple_chat, chat_agent_code_config, chat_agent_code_json
+
+# Simple chat
+response = simple_chat("What is the capital of France?")
+print(response)
+
+# Chat with custom configuration for code generation
+code = chat_agent_code_config(
+    "Write a Python function to calculate fibonacci numbers",
+    "You are an expert Python developer."
+)
+print(code)
+
+# Chat that returns JSON only
+json_response = chat_agent_code_json(
+    "Generate a user profile with name, age, and email",
+    "data_generator"
+)
+print(json_response)
+```
+
+## Function Signatures
+
+### simple_chat(prompt: str) -> str
+
+Send a prompt to Anthropic AI and return the response.
+
+**Parameters:**
+- `prompt` (str): The prompt to send to the AI.
+
+**Returns:**
+- str: The AI's response.
+
+**Example:**
+```python
+response = simple_chat("Tell me a joke")
+```
+
+### chat_agent_code_config(prompt: str, system: str) -> str
+
+Send a prompt with custom system message, low temperature (0.0) for deterministic output, and high token limit for code generation.
+
+**Parameters:**
+- `prompt` (str): The prompt to send to the AI.
+- `system` (str): The system message to set the AI's behavior.
+
+**Returns:**
+- str: The AI's response.
+
+**Example:**
+```python
+code = chat_agent_code_config(
+    "Create a REST API endpoint",
+    "You are a backend developer specializing in FastAPI."
+)
+```
+
+### chat_agent_code_json(prompt: str, agent_type: str) -> str
+
+Send a prompt and receive a JSON-only response. The system message is automatically selected based on the agent_type.
+
+**Parameters:**
+- `prompt` (str): The prompt to send to the AI.
+- `agent_type` (str): The type of agent. Options:
+  - `'code_generator'`: For generating code in JSON format
+  - `'data_generator'`: For generating structured data
+  - `'api_designer'`: For API specifications and schemas
+  - `'config_generator'`: For configuration files
+  - `'default'`: Generic JSON responses
+
+**Returns:**
+- str: The AI's response in JSON format.
+
+**Example:**
+```python
+json_data = chat_agent_code_json(
+    "Create a JSON schema for a blog post",
+    "api_designer"
+)
+```
+
+## Running Tests
+
+```bash
+cd tests
+chmod +x setup_and_run.sh
+./setup_and_run.sh
+```
+
+This will create a virtual environment, install dependencies, install the package, and run the tests.
+
+## Requirements
+
+- Python >= 3.7
+- anthropic >= 0.18.0
+- python-dotenv >= 1.0.0 (for loading environment variables)
+
+## License
+
+MIT

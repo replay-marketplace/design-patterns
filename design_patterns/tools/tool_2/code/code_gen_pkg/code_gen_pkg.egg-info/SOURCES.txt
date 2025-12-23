@@ -1,0 +1,9 @@
+setup.py
+code_gen/__init__.py
+code_gen/code_gen.py
+code_gen_pkg.egg-info/PKG-INFO
+code_gen_pkg.egg-info/SOURCES.txt
+code_gen_pkg.egg-info/dependency_links.txt
+code_gen_pkg.egg-info/requires.txt
+code_gen_pkg.egg-info/top_level.txt
+tests/test.py

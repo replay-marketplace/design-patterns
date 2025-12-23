@@ -1,0 +1,12 @@
+README.md
+setup.py
+agent_chat/__init__.py
+agent_chat/chat_agent_code_config.py
+agent_chat/chat_agent_code_json.py
+agent_chat/simple_chat.py
+agent_chat.egg-info/PKG-INFO
+agent_chat.egg-info/SOURCES.txt
+agent_chat.egg-info/dependency_links.txt
+agent_chat.egg-info/requires.txt
+agent_chat.egg-info/top_level.txt
+tests/test.py

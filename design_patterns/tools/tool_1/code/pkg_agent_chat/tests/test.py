@@ -24,6 +24,7 @@ def test_simple_chat():
         response = simple_chat("Say 'Hello, World!' in one sentence.")
         assert isinstance(response, str)
         assert len(response) > 0
+        print(response)
         print("✓ simple_chat tests passed")
     except Exception as e:
         print(f"⚠ simple_chat test failed: {e}")

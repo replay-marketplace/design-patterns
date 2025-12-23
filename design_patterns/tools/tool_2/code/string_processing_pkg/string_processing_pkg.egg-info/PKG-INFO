@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: string-processing-pkg
+Version: 0.1.0
+Summary: A Python package with string processing utilities
+Home-page: https://github.com/yourusername/string_processing_pkg
+Author: Your Name
+Author-email: your.email@example.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-python
+Dynamic: summary
+
+# String Processing Package
+
+## API Signatures
+
+### Basic
+
+- `append_string(base: str, addition: str) -> str` - Concatenate strings
+- `search_and_delete(text: str, pattern: str) -> str` - Find and remove
+- `search_and_replace(text: str, old: str, new: str) -> str` - Find and replace
+- `strip_markdown(text: str) -> str` - Remove markdown formatting
+

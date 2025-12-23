@@ -69,7 +69,7 @@ def chat_agent_code_json(prompt: str, agent_type: str = "code") -> dict:
 
     response = client.messages.create(
         model="claude-sonnet-4-5-20250929",
-        max_tokens=4096,
+        max_tokens=16384,  # Safe limit that doesn't require streaming (16k)
         system=system_message,
         messages=[
             {"role": "user", "content": prompt}

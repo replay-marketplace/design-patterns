@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: file_processing
+Version: 0.1.0
+Summary: A simple file processing package for reading, writing, and managing files and directories
+Author: Your Name
+Requires-Python: >=3.6
+Dynamic: author
+Dynamic: requires-python
+Dynamic: summary

@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: code-gen-pkg
+Version: 0.1.0
+Summary: A Python package for code generation using LLM agents
+Home-page: https://github.com/yourusername/code_gen_pkg
+Author: Your Name
+Author-email: your.email@example.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.31.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Code Gen Package
+
+## API Signatures
+
+### User facing functions
+
+- `code_gen(prompt: str, project_name: str) -> str` - Code generation, returns the dir with the code
+- `code_gen(prompt: str, project_name: str, template_dir_path: str) -> str` - Code generation, uses the dir and the code in it as the initial starting point.
+

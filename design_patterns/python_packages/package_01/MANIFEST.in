@@ -1,4 +1,0 @@
-include README.md
-include LICENSE
-recursive-include package_01 *.py
-

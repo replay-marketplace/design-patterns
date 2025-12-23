@@ -1,0 +1,161 @@
+# String Processing Package
+
+A Python package for common string processing operations including concatenation, search and replace, markdown stripping, and token counting.
+
+## Installation
+
+```bash
+cd string_processing_pkg
+pip install -e .
+```
+
+## Usage
+
+```python
+from string_processing import (
+    append_string,
+    search_and_delete,
+    search_and_replace,
+    strip_markdown,
+    count_tokens
+)
+
+# Concatenate strings
+result = append_string("Hello", " World")
+print(result)  # "Hello World"
+
+# Search and delete
+result = search_and_delete("Hello World", "World")
+print(result)  # "Hello "
+
+# Search and replace
+result = search_and_replace("Hello World", "World", "Python")
+print(result)  # "Hello Python"
+
+# Strip markdown formatting
+result = strip_markdown("# Header\n\n**Bold** text")
+print(result)  # "Header\n\nBold text"
+
+# Count tokens
+token_count = count_tokens("This is a test sentence.")
+print(token_count)  # Estimated token count
+```
+
+## Function Signatures
+
+### append_string(base: str, addition: str) -> str
+
+Concatenate two strings together.
+
+**Parameters:**
+- `base` (str): The base string to append to
+- `addition` (str): The string to append to the base
+
+**Returns:**
+- `str`: The concatenated string
+
+**Example:**
+```python
+result = append_string("Hello", " World")
+# Returns: "Hello World"
+```
+
+### search_and_delete(text: str, pattern: str) -> str
+
+Find and remove all occurrences of a pattern from text.
+
+**Parameters:**
+- `text` (str): The text to search in
+- `pattern` (str): The pattern to find and remove
+
+**Returns:**
+- `str`: The text with all occurrences of the pattern removed
+
+**Example:**
+```python
+result = search_and_delete("Hello World World", "World")
+# Returns: "Hello  "
+```
+
+### search_and_replace(text: str, old: str, new: str) -> str
+
+Find and replace all occurrences of a pattern in text.
+
+**Parameters:**
+- `text` (str): The text to search in
+- `old` (str): The pattern to find
+- `new` (str): The replacement string
+
+**Returns:**
+- `str`: The text with all occurrences of old replaced with new
+
+**Example:**
+```python
+result = search_and_replace("Hello World", "World", "Python")
+# Returns: "Hello Python"
+```
+
+### strip_markdown(text: str) -> str
+
+Remove markdown formatting from text.
+
+This function removes common markdown elements including:
+- Headers (# ## ### etc.)
+- Bold (**text** or __text__)
+- Italic (*text* or _text_)
+- Links ([text](url))
+- Images (![alt](url))
+- Code blocks (```code``` or `code`)
+- Strikethrough (~~text~~)
+- Blockquotes (> text)
+- Horizontal rules (--- or ***)
+- List markers (- or * or 1.)
+
+**Parameters:**
+- `text` (str): The markdown text to strip
+
+**Returns:**
+- `str`: The text with markdown formatting removed
+
+**Example:**
+```python
+result = strip_markdown("# Header\n\n**Bold** and *italic*")
+# Returns: "Header\n\nBold and italic"
+```
+
+### count_tokens(text: str) -> int
+
+Estimate the token count of a text string.
+
+This function provides a simple estimation of tokens by splitting on whitespace,
+counting punctuation as separate tokens, and applying a rough approximation for
+subword tokenization.
+
+**Note:** This is a simplified estimation. For accurate token counts with specific
+models (like OpenAI's GPT models), use a proper tokenizer like `tiktoken`.
+
+**Parameters:**
+- `text` (str): The text to count tokens for
+
+**Returns:**
+- `int`: Estimated number of tokens
+
+**Example:**
+```python
+token_count = count_tokens("This is a test sentence.")
+# Returns: estimated token count (e.g., 6)
+```
+
+## Running Tests
+
+```bash
+cd tests
+chmod +x setup_and_run.sh
+./setup_and_run.sh
+```
+
+This will create a virtual environment, install dependencies, install the package, and run the tests.
+
+## License
+
+MIT License

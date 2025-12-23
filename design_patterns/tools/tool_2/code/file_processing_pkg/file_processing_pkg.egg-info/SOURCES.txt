@@ -1,0 +1,12 @@
+setup.py
+file_processing/__init__.py
+file_processing/create_directory_structure.py
+file_processing/dir_exists.py
+file_processing/file_exists.py
+file_processing/read_file_content.py
+file_processing/save_text_to_file.py
+file_processing_pkg.egg-info/PKG-INFO
+file_processing_pkg.egg-info/SOURCES.txt
+file_processing_pkg.egg-info/dependency_links.txt
+file_processing_pkg.egg-info/top_level.txt
+tests/test.py

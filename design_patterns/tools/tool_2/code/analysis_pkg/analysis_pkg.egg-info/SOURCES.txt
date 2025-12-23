@@ -1,0 +1,15 @@
+setup.py
+analysis/__init__.py
+analysis/count_file_types.py
+analysis/count_files.py
+analysis/count_function_defs.py
+analysis/count_loc.py
+analysis/count_python_functions.py
+analysis/count_python_imports.py
+analysis/count_words.py
+analysis/get_path_to_file.py
+analysis_pkg.egg-info/PKG-INFO
+analysis_pkg.egg-info/SOURCES.txt
+analysis_pkg.egg-info/dependency_links.txt
+analysis_pkg.egg-info/top_level.txt
+tests/test.py

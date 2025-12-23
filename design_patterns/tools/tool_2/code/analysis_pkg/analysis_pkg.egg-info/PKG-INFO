@@ -1,0 +1,47 @@
+Metadata-Version: 2.4
+Name: analysis-pkg
+Version: 0.1.0
+Summary: A Python package for code and directory analysis
+Home-page: https://github.com/yourusername/analysis_pkg
+Author: Your Name
+Author-email: your.email@example.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-python
+Dynamic: summary
+
+# Analysis Package
+
+## API Signatures
+
+### Basic: Dir/File counter mechanics
+
+- `count_loc(dir: str) -> int` - Returns total lines of text in directory
+- `count_words(dir: str, text: str = None) -> int` - Returns total words in dir (if text is None) or occurrences of text pattern
+- `count_files(dir: str) -> int` - Returns the number of files in dir
+- `count_file_types(dir: str) -> List[Tuple[str, int]]` - Returns a list of tuples, with file type (ex. "*.py") and corresponding count
+- `count_function_defs(dir: str) -> int` - Returns the LoC in requirements.txt
+- `get_path_to_file(dir: str, filename: str) -> str` - searches all files in the given dir for the given filename and returns the path to it
+
+### Python Code Analysis
+
+- `count_python_imports(dir: str) -> Tuple[int, List[str]]` - Use ast python lib to make a list of all imported functions, code, libraries, local or remote, all types. Returns the total number of imports and the list of all imports.
+- `count_python_functions(dir: str) -> Tuple[int, List[str]]` - Use ast python lib to make a list of all functions defined in given dir. Returns the function count and all function names.
+

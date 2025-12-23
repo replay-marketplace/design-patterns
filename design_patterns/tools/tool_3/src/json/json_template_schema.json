@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON Directory Structure Schema",
+  "description": "Schema for representing a directory structure with files and subdirectories",
+  "type": "object",
+  "required": ["files", "directories"],
+  "properties": {
+    "files": {
+      "type": "object",
+      "description": "Mapping of filenames to their content",
+      "additionalProperties": {
+        "type": "string",
+        "description": "File content"
+      }
+    },
+    "directories": {
+      "type": "object",
+      "description": "Mapping of directory names to nested directory structures",
+      "additionalProperties": {
+        "$ref": "#"
+      }
+    }
+  },
+  "additionalProperties": false
+}
+

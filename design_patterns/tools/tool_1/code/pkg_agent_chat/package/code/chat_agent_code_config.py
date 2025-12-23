@@ -32,7 +32,7 @@ def chat_agent_code_config(prompt: str, system: str) -> str:
 
     response = client.messages.create(
         model="claude-sonnet-4-5-20250929",
-        max_tokens=4096,  # Large max_tokens to allow full response
+        max_tokens=16384,  # Safe limit that doesn't require streaming (16k)
         system=system,
         messages=[
             {"role": "user", "content": prompt}

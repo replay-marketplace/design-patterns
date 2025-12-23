@@ -1,0 +1,11 @@
+setup.py
+agent_chat/__init__.py
+agent_chat/chat_agent_code_json.py
+agent_chat/config.py
+agent_chat/simple_chat.py
+agent_chat_pkg.egg-info/PKG-INFO
+agent_chat_pkg.egg-info/SOURCES.txt
+agent_chat_pkg.egg-info/dependency_links.txt
+agent_chat_pkg.egg-info/requires.txt
+agent_chat_pkg.egg-info/top_level.txt
+tests/test.py

@@ -1,9 +1,0 @@
-README.md
-setup.py
-python_tools_utils/__init__.py
-python_tools_utils/function_a.py
-python_tools_utils/function_b.py
-python_tools_utils.egg-info/PKG-INFO
-python_tools_utils.egg-info/SOURCES.txt
-python_tools_utils.egg-info/dependency_links.txt
-python_tools_utils.egg-info/top_level.txt

@@ -29,7 +29,7 @@ def simple_chat(prompt: str) -> str:
 
     response = client.messages.create(
         model="claude-sonnet-4-5-20250929",
-        max_tokens=1024,
+        max_tokens=16384,  # Safe limit that doesn't require streaming (16k)
         messages=[
             {"role": "user", "content": prompt}
         ]
