@@ -1,0 +1,19 @@
+[
+  {
+    "path": "src/main.py",
+    "contents": "#!/usr/bin/env python3\n\"\"\"Main application entry point.\"\"\"\n\ndef main():\n    print(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    main()\n"
+  },
+  {
+    "path": "src/utils.py",
+    "contents": "#!/usr/bin/env python3\n\"\"\"Utility functions.\"\"\"\n\ndef helper_function():\n    \"\"\"A helper function.\"\"\"\n    return True\n"
+  },
+  {
+    "path": "README.md",
+    "contents": "# Example Project\n\nThis is an example project demonstrating the JSON structure.\n\n## Usage\n\nRun the main script:\n```bash\npython src/main.py\n```\n"
+  },
+  {
+    "path": "config.json",
+    "contents": "{\n  \"version\": \"1.0.0\",\n  \"debug\": false,\n  \"settings\": {\n    \"timeout\": 30\n  }\n}\n"
+  }
+]
+

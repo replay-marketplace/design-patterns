@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Directory JSON Schema",
+  "description": "Schema for a list of files with path and contents",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["path", "contents"],
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "The file path relative to the project root"
+      },
+      "contents": {
+        "type": "string",
+        "description": "The contents of the file as a string"
+      }
+    },
+    "additionalProperties": false
+  }
+}
+
