@@ -53,17 +53,28 @@ tool_4/src/
 - Test files use clean imports: `from module1 import add, sub`
 
 
-Methods:
+Simple Methods:
 `add_file`
 `add_dir`
 `print_dir_tree` - prints the tree, with dir and file names using ├──, │, └──
+
+Pruning Methods:
+`set_dir_to_invisible` - Sets the dir to invisible
+`generate_file_dict` - generates a dictionary with files. Does not include files set to Invisible, or anything within a dir that's set to Invisible
 
 
 In src/dir_tree/tests/ edit the tests so that they print things to terminal when I run them, so I can inspect that this works. 
 
 
 
+# print_dir_tree()
+`print_dir_tree(words: bool, contents: bool) - prints the tree. 
+If 'words' is set to True it prints the word count in front of file name. 
+If 'contents' is set to true it prints contents after file name. 
 
+├── (200) dir_tree/
+│   ├── (100) README_API_SIGNATURE.md, content="..."
+│   ├── (100) main.py, content="..."
 
 
 
