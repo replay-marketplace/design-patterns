@@ -54,3 +54,4 @@ def count_file_types(dir: str) -> List[Tuple[str, int]]:
     return result
 
 
+

@@ -1,5 +1,7 @@
 """Directory tree implementation with File and Node_Dir classes."""
 
+import os
+import stat
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, Optional, List, Union
@@ -8,7 +10,6 @@ from typing import Dict, Optional, List, Union
 class State(Enum):
     """State enum for files and directories."""
     VISIBLE = "visible"
-    READONLY = "readonly"
     HIDDEN = "hidden"
 
 
@@ -58,9 +59,14 @@ class DirTree:
         # Add the file
         current.files[filename] = File(path=filepath, content=content, state=state)
     
-    def add_dir(self, dirpath: str, state: State = State.VISIBLE) -> None:
-        """Add a directory to the tree at the given path."""
-        parts = [p for p in dirpath.split('/') if p != ""]
+    def add_dir(self, name: str, state: State = State.VISIBLE) -> None:
+        """Add an empty directory to the tree.
+        
+        Args:
+            name: Directory name (if it contains '/', it's treated as a path)
+            state: State of the directory (default: VISIBLE)
+        """
+        parts = [p for p in name.split('/') if p != ""]
         
         current = self.root
         for dir_name in parts:
@@ -112,12 +118,10 @@ class DirTree:
             state: State enum value
             
         Returns:
-            Single letter abbreviation: V for visible, R for readonly, H for hidden
+            Single letter abbreviation: V for visible, H for hidden
         """
         if state == State.VISIBLE:
             return "V"
-        elif state == State.READONLY:
-            return "R"
         elif state == State.HIDDEN:
             return "H"
         else:
@@ -212,8 +216,9 @@ class DirTree:
             words: If True, print word count before file/directory names (default: False)
             contents: If True, print file contents after file names (default: False)
             state: If True, print state abbreviation before file/directory names (default: False)
-                   V = visible, R = readonly, H = hidden
+                   V = visible, H = hidden
         """
+        print()
         if self.root.path == "" and not self.root.children and not self.root.files:
             print("(empty tree)")
             return
@@ -230,6 +235,35 @@ class DirTree:
         """
         self.root = Node_Dir(path="", state=State.VISIBLE)
         
+        # Handle dictionary format (path -> content)
+        if isinstance(files, dict):
+            for filepath, content in files.items():
+                self.add_file(filepath, content)
+        # Handle list format (list of dicts with "path" and "contents"/"content")
+        elif isinstance(files, list):
+            for file_dict in files:
+                if isinstance(file_dict, dict):
+                    filepath = file_dict.get("path", "")
+                    content = file_dict.get("contents", file_dict.get("content", ""))
+                    self.add_file(filepath, content)
+                else:
+                    raise ValueError(f"Expected dict in list, got {type(file_dict)}")
+        else:
+            raise ValueError(f"Expected list or dict, got {type(files)}")
+        
+        return self.root
+    
+    def add_files_to_dir_tree(self, files: Union[List[Dict[str, str]], Dict[str, str]]) -> Node_Dir:
+        """Add files to an existing tree without resetting it.
+        
+        Args:
+            files: Either:
+                - List[Dict[str, str]]: List of dicts with "path" and "contents"/"content" keys
+                - Dict[str, str]: Dictionary mapping file paths to file contents
+                
+        Returns:
+            The root Node_Dir of the tree
+        """
         # Handle dictionary format (path -> content)
         if isinstance(files, dict):
             for filepath, content in files.items():
@@ -329,6 +363,20 @@ class DirTree:
         
         self._print_simple_recursive(self.root)
     
+    def change_dir_tree_state(self, state: State) -> int:
+        """Change the state of the entire dir_tree and all its subdirectories and files.
+        
+        This function changes the state of the entire dir_tree (starting from root).
+        Then it recursively goes and changes the state of all sub dirs and their files.
+        
+        Args:
+            state: New state to set for the entire tree
+            
+        Returns:
+            Total number of states updated (for both files and dirs)
+        """
+        return self._change_dir_state_recursive(self.root, state)
+    
     def _change_dir_state_recursive(self, node: Node_Dir, state: State) -> int:
         """Recursively change the state of a directory and all its subdirectories and files.
         
@@ -388,4 +436,121 @@ class DirTree:
         
         # Change state recursively
         return self._change_dir_state_recursive(current, state)
+    
+    def change_file_state(self, path: str, state: State) -> int:
+        """Find a file by exact path and change its state, then update parent directories.
+        
+        Args:
+            path: Exact path to the file (must match exactly)
+            state: New state to set for the file
+            
+        Returns:
+            Number of states updated (file + parent directories, only counting actual changes)
+            
+        Raises:
+            ValueError: If the file path does not exist
+        """
+        parts = path.split('/')
+        filename = parts[-1]
+        dir_parts = parts[:-1] if len(parts) > 1 else []
+        
+        # Navigate to the parent directory, keeping track of the path
+        current = self.root
+        parent_dirs = []  # Store parent directories in order (from root to parent of file)
+        
+        for dir_name in dir_parts:
+            if dir_name == "":
+                continue
+            if dir_name not in current.children:
+                raise ValueError(f"File path '{path}' does not exist: directory '{dir_name}' not found")
+            parent_dirs.append(current)  # Store parent before moving down
+            current = current.children[dir_name]
+        
+        # Find the file in the current directory
+        if filename not in current.files:
+            raise ValueError(f"File path '{path}' does not exist: file '{filename}' not found")
+        
+        file_obj = current.files[filename]
+        
+        # Verify the path matches exactly
+        if file_obj.path != path:
+            raise ValueError(f"File path '{path}' does not match exactly. Found path: '{file_obj.path}'")
+        
+        count = 0
+        
+        # Change the file's state only if it's different
+        if file_obj.state != state:
+            file_obj.state = state
+            count += 1
+        
+        # Recursively go up the directories and change parent directory states
+        # If file state is set to VISIBLE, all parent dirs need to be changed to VISIBLE if they were HIDDEN
+        if state == State.VISIBLE:
+            # Include the immediate parent directory (the one containing the file)
+            parent_dirs.append(current)
+            # Traverse up through parent directories (from immediate parent up to root)
+            for parent_dir in reversed(parent_dirs):
+                if parent_dir.state == State.HIDDEN:
+                    parent_dir.state = State.VISIBLE
+                    count += 1
+        
+        return count
+    
+    def _store_files_recursive(self, node: Node_Dir, output_dir: str) -> None:
+        """Recursively store visible files from the tree to the filesystem.
+        
+        Args:
+            node: Directory node to process
+            output_dir: Base output directory path
+        """
+        # Skip if directory is hidden
+        if node.state == State.HIDDEN:
+            return
+        
+        # Create directory if it's not the root and doesn't exist
+        if node.path != "":
+            dir_path = os.path.join(output_dir, node.path)
+            os.makedirs(dir_path, exist_ok=True)
+        
+        # Store visible files from this directory
+        for filename, file_obj in node.files.items():
+            if file_obj.state == State.VISIBLE:
+                # Construct full file path
+                if node.path != "":
+                    file_path = os.path.join(output_dir, node.path, filename)
+                else:
+                    file_path = os.path.join(output_dir, filename)
+                
+                # Write file content
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(file_obj.content)
+                
+                # Make .sh files executable
+                if filename.endswith('.sh'):
+                    os.chmod(file_path, os.stat(file_path).st_mode | stat.S_IEXEC)
+        
+        # Recursively process child directories
+        for child_dir in node.children.values():
+            self._store_files_recursive(child_dir, output_dir)
+    
+    def store_files(self, output_dir: str) -> str:
+        """Store files and their contents into the provided output directory.
+        
+        Only visible files are stored. If a *.sh file is stored, it is made executable
+        with chmod +x.
+        
+        Args:
+            output_dir: Directory path where files should be stored
+            
+        Returns:
+            The absolute path where files were stored
+        """
+        # Create output directory if it doesn't exist
+        abs_output_dir = os.path.abspath(output_dir)
+        os.makedirs(abs_output_dir, exist_ok=True)
+        
+        # Recursively store all visible files
+        self._store_files_recursive(self.root, abs_output_dir)
+        
+        return abs_output_dir
 

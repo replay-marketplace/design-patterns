@@ -1,0 +1,258 @@
+[3J[H[2J
+==================================================
+Step 1: Initialize with template files...
+==================================================
+
+├── (V) (11) README_API_SIGNATURE.md
+├── (V) (19) README_tests.md
+├── (V) (0) src/
+│   └── (V) (0) __init__.py
+└── (V) (87) tests/
+    ├── (V) (0) requirements.txt
+    ├── (V) (9) run_tests.sh
+    ├── (V) (11) setup.sh
+    └── (V) (67) test.py
+
+==================================================
+Step 2: Send to Agent for code gen...
+==================================================
+{
+  "README_API_SIGNATURE.md": "# API Signature\n\n`function_name(size: int, name: string) -> int` - <Description>\n\n",
+  "README_tests.md": "# Absolute minimum possible readme, just two commands on how to run setup.sh and then run_tests.sh from this directory.\n",
+  "src/__init__.py": "",
+  "tests/test.py": "import unittest\n\nclass TestClass(unittest.TestCase):\n    \"\"\"Test cases for [DESCRIBE WHAT YOU'RE TESTING].\"\"\"\n    \n    def test_example(self):\n        \"\"\"Test [DESCRIBE THIS TEST].\"\"\"\n        # TODO: Add your test assertions here\n        # self.assertEqual(actual, expected)\n        pass\n\n\nif __name__ == '__main__':\n    # Create test suite and run tests\n    loader = unittest.TestLoader()\n    suite = loader.loadTestsFromTestCase(TestClass)\n    runner = unittest.TextTestRunner(verbosity=2)\n    result = runner.run(suite)\n    \n    # Write test result to file\n    with open('../replaytest_bool.txt', 'w') as f:\n        if result.wasSuccessful():\n            f.write('PASSED')\n        else:\n            f.write('FAILED')",
+  "tests/run_tests.sh": "# Test runner that sets PYTHONPATH and runs tests\n",
+  "tests/setup.sh": "# Make python env, install requirements, set PYTHONPATH in venv activation\n",
+  "tests/requirements.txt": ""
+}
+
+
+Response:
+{"README_API_SIGNATURE.md":"# API Signature\n\n`add(a: float, b: float) -> float` - Adds two numbers together and returns the result.\n\n","README_tests.md":"# Running Tests\n\n```bash\ncd tests\nbash setup.sh\nbash run_tests.sh\n```\n","src/__init__.py":"","src/calculator.py":"def add(a: float, b: float) -> float:\n    \"\"\"Add two numbers together.\n    \n    Args:\n        a: The first number.\n        b: The second number.\n    \n    Returns:\n        The sum of a and b.\n    \"\"\"\n    return a + b\n","tests/test.py":"import unittest\nfrom src.calculator import add\n\n\nclass TestCalculator(unittest.TestCase):\n    \"\"\"Test cases for the calculator add function.\"\"\"\n    \n    def test_add_positive_numbers(self):\n        \"\"\"Test adding two positive numbers.\"\"\"\n        self.assertEqual(add(2, 3), 5)\n    \n    def test_add_negative_numbers(self):\n        \"\"\"Test adding two negative numbers.\"\"\"\n        self.assertEqual(add(-2, -3), -5)\n    \n    def test_add_mixed_numbers(self):\n        \"\"\"Test adding a positive and negative number.\"\"\"\n        self.assertEqual(add(-2, 3), 1)\n    \n    def test_add_zeros(self):\n        \"\"\"Test adding zeros.\"\"\"\n        self.assertEqual(add(0, 0), 0)\n    \n    def test_add_floats(self):\n        \"\"\"Test adding floating point numbers.\"\"\"\n        self.assertAlmostEqual(add(1.5, 2.5), 4.0)\n\n\nif __name__ == '__main__':\n    # Create test suite and run tests\n    loader = unittest.TestLoader()\n    suite = loader.loadTestsFromTestCase(TestCalculator)\n    runner = unittest.TextTestRunner(verbosity=2)\n    result = runner.run(suite)\n    \n    # Write test result to file\n    with open('../replaytest_bool.txt', 'w') as f:\n        if result.wasSuccessful():\n            f.write('PASSED')\n        else:\n            f.write('FAILED')\n","tests/run_tests.sh":"#!/bin/bash\n# Test runner that sets PYTHONPATH and runs tests\ncd \"$(dirname \"$0\")\"\nsource venv/bin/activate\nPYTHONPATH=\"$(dirname \"$0\")/..\" python3 test.py\n","tests/setup.sh":"#!/bin/bash\n# Make python env, install requirements, set PYTHONPATH in venv activation\ncd \"$(dirname \"$0\")\"\npython3 -m venv venv\nsource venv/bin/activate\nif [ -s requirements.txt ]; then\n    pip install -r requirements.txt\nfi\necho 'export PYTHONPATH=\"${PYTHONPATH}:$(cd .. && pwd)\"' >> venv/bin/activate\n","tests/requirements.txt":""}
+
+
+Input prompt word count: 190
+Output prompt word count: 207
+Done
+
+==================================================
+Step 3: Convert generated code back into dir tree...
+==================================================
+{'README_API_SIGNATURE.md': '# API Signature\n\n`add(a: float, b: float) -> float` - Adds two numbers together and returns the result.\n\n', 'README_tests.md': '# Running Tests\n\n```bash\ncd tests\nbash setup.sh\nbash run_tests.sh\n```\n', 'src/__init__.py': '', 'src/calculator.py': 'def add(a: float, b: float) -> float:\n    """Add two numbers together.\n    \n    Args:\n        a: The first number.\n        b: The second number.\n    \n    Returns:\n        The sum of a and b.\n    """\n    return a + b\n', 'tests/test.py': 'import unittest\nfrom src.calculator import add\n\n\nclass TestCalculator(unittest.TestCase):\n    """Test cases for the calculator add function."""\n    \n    def test_add_positive_numbers(self):\n        """Test adding two positive numbers."""\n        self.assertEqual(add(2, 3), 5)\n    \n    def test_add_negative_numbers(self):\n        """Test adding two negative numbers."""\n        self.assertEqual(add(-2, -3), -5)\n    \n    def test_add_mixed_numbers(self):\n        """Test adding a positive and negative number."""\n        self.assertEqual(add(-2, 3), 1)\n    \n    def test_add_zeros(self):\n        """Test adding zeros."""\n        self.assertEqual(add(0, 0), 0)\n    \n    def test_add_floats(self):\n        """Test adding floating point numbers."""\n        self.assertAlmostEqual(add(1.5, 2.5), 4.0)\n\n\nif __name__ == \'__main__\':\n    # Create test suite and run tests\n    loader = unittest.TestLoader()\n    suite = loader.loadTestsFromTestCase(TestCalculator)\n    runner = unittest.TextTestRunner(verbosity=2)\n    result = runner.run(suite)\n    \n    # Write test result to file\n    with open(\'../replaytest_bool.txt\', \'w\') as f:\n        if result.wasSuccessful():\n            f.write(\'PASSED\')\n        else:\n            f.write(\'FAILED\')\n', 'tests/run_tests.sh': '#!/bin/bash\n# Test runner that sets PYTHONPATH and runs tests\ncd "$(dirname "$0")"\nsource venv/bin/activate\nPYTHONPATH="$(dirname "$0")/.." python3 test.py\n', 'tests/setup.sh': '#!/bin/bash\n# Make python env, install requirements, set PYTHONPATH in venv activation\ncd "$(dirname "$0")"\npython3 -m venv venv\nsource venv/bin/activate\nif [ -s requirements.txt ]; then\n    pip install -r requirements.txt\nfi\necho \'export PYTHONPATH="${PYTHONPATH}:$(cd .. && pwd)"\' >> venv/bin/activate\n', 'tests/requirements.txt': ''}
+
+├── (V) (18) README_API_SIGNATURE.md
+├── (V) (11) README_tests.md
+├── (V) (32) src/
+│   ├── (V) (0) __init__.py
+│   └── (V) (32) calculator.py
+└── (V) (163) tests/
+    ├── (V) (0) requirements.txt
+    ├── (V) (19) run_tests.sh
+    ├── (V) (40) setup.sh
+    └── (V) (104) test.py
+
+==================================================
+Step 4: Run the tests
+==================================================
+Stored files to: /Users/jvasiljevic/continue/gh/design-patterns/design_patterns/tools/tool_4/code_gen/simple_calculator
+
+==================================================
+Step 5: Setup for Blind Tests...
+==================================================
+
+├── README_API_SIGNATURE.md
+├── README_tests.md
+├── src/
+│   ├── __init__.py
+│   └── calculator.py
+└── tests/
+    ├── requirements.txt
+    ├── run_tests.sh
+    ├── setup.sh
+    ├── test.py
+    └── test_blind.py
+
+├── (V) README_API_SIGNATURE.md
+├── (V) README_tests.md
+├── (H) src/
+│   ├── (H) __init__.py
+│   └── (H) calculator.py
+└── (V) tests/
+    ├── (V) requirements.txt
+    ├── (V) run_tests.sh
+    ├── (V) setup.sh
+    ├── (H) test.py
+    └── (V) test_blind.py
+{
+  "README_API_SIGNATURE.md": "# API Signature\n\n`add(a: float, b: float) -> float` - Adds two numbers together and returns the result.\n\n",
+  "README_tests.md": "# Running Tests\n\n```bash\ncd tests\nbash setup.sh\nbash run_tests.sh\n```\n",
+  "tests/run_tests.sh": "#!/bin/bash\n# Test runner that sets PYTHONPATH and runs tests\ncd \"$(dirname \"$0\")\"\nsource venv/bin/activate\nPYTHONPATH=\"$(dirname \"$0\")/..\" python3 test.py\n",
+  "tests/setup.sh": "#!/bin/bash\n# Make python env, install requirements, set PYTHONPATH in venv activation\ncd \"$(dirname \"$0\")\"\npython3 -m venv venv\nsource venv/bin/activate\nif [ -s requirements.txt ]; then\n    pip install -r requirements.txt\nfi\necho 'export PYTHONPATH=\"${PYTHONPATH}:$(cd .. && pwd)\"' >> venv/bin/activate\n",
+  "tests/requirements.txt": "",
+  "tests/test_blind.py": "import unittest\n\nclass TestClass(unittest.TestCase):\n    \"\"\"Test cases for [DESCRIBE WHAT YOU'RE TESTING].\"\"\"\n    \n    def test_example(self):\n        \"\"\"Test [DESCRIBE THIS TEST].\"\"\"\n        # TODO: Add your test assertions here\n        # self.assertEqual(actual, expected)\n        pass\n\n\nif __name__ == '__main__':\n    # Create test suite and run tests\n    loader = unittest.TestLoader()\n    suite = loader.loadTestsFromTestCase(TestClass)\n    runner = unittest.TextTestRunner(verbosity=2)\n    result = runner.run(suite)\n    \n    # Write test result to file\n    with open('test_bool.txt', 'w') as f:\n        if result.wasSuccessful():\n            f.write('PASSED')\n        else:\n            f.write('FAILED')"
+}
+
+
+Response:
+{"tests/test_blind.py": "import unittest\nfrom calculator import add\n\nclass TestCalculator(unittest.TestCase):\n    \"\"\"Test cases for calculator add function.\"\"\"\n    \n    def test_add_positive_numbers(self):\n        \"\"\"Test adding two positive numbers.\"\"\"\n        self.assertEqual(add(2, 3), 5)\n    \n    def test_add_negative_numbers(self):\n        \"\"\"Test adding two negative numbers.\"\"\"\n        self.assertEqual(add(-2, -3), -5)\n    \n    def test_add_mixed_numbers(self):\n        \"\"\"Test adding positive and negative numbers.\"\"\"\n        self.assertEqual(add(-2, 3), 1)\n        self.assertEqual(add(2, -3), -1)\n    \n    def test_add_zeros(self):\n        \"\"\"Test adding zeros.\"\"\"\n        self.assertEqual(add(0, 0), 0)\n        self.assertEqual(add(5, 0), 5)\n        self.assertEqual(add(0, 5), 5)\n    \n    def test_add_floats(self):\n        \"\"\"Test adding float numbers.\"\"\"\n        self.assertAlmostEqual(add(1.5, 2.5), 4.0)\n        self.assertAlmostEqual(add(0.1, 0.2), 0.3, places=5)\n\n\nif __name__ == '__main__':\n    # Create test suite and run tests\n    loader = unittest.TestLoader()\n    suite = loader.loadTestsFromTestCase(TestCalculator)\n    runner = unittest.TextTestRunner(verbosity=2)\n    result = runner.run(suite)\n    \n    # Write test result to file\n    with open('test_bool.txt', 'w') as f:\n        if result.wasSuccessful():\n            f.write('PASSED')\n        else:\n            f.write('FAILED')", "tests/run_tests.sh": "#!/bin/bash\n# Test runner that sets PYTHONPATH and runs tests\ncd \"$(dirname \"$0\")\"\nsource venv/bin/activate\nPYTHONPATH=\"$(dirname \"$0\")/..\" python3 test.py\nPYTHONPATH=\"$(dirname \"$0\")/..\" python3 test_blind.py\n"}
+
+
+Input prompt word count: 210
+Output prompt word count: 137
+Done
+
+==================================================
+Step 6: Convert generated code back into dir tree...
+==================================================
+{'tests/test_blind.py': 'import unittest\nfrom calculator import add\n\nclass TestCalculator(unittest.TestCase):\n    """Test cases for calculator add function."""\n    \n    def test_add_positive_numbers(self):\n        """Test adding two positive numbers."""\n        self.assertEqual(add(2, 3), 5)\n    \n    def test_add_negative_numbers(self):\n        """Test adding two negative numbers."""\n        self.assertEqual(add(-2, -3), -5)\n    \n    def test_add_mixed_numbers(self):\n        """Test adding positive and negative numbers."""\n        self.assertEqual(add(-2, 3), 1)\n        self.assertEqual(add(2, -3), -1)\n    \n    def test_add_zeros(self):\n        """Test adding zeros."""\n        self.assertEqual(add(0, 0), 0)\n        self.assertEqual(add(5, 0), 5)\n        self.assertEqual(add(0, 5), 5)\n    \n    def test_add_floats(self):\n        """Test adding float numbers."""\n        self.assertAlmostEqual(add(1.5, 2.5), 4.0)\n        self.assertAlmostEqual(add(0.1, 0.2), 0.3, places=5)\n\n\nif __name__ == \'__main__\':\n    # Create test suite and run tests\n    loader = unittest.TestLoader()\n    suite = loader.loadTestsFromTestCase(TestCalculator)\n    runner = unittest.TextTestRunner(verbosity=2)\n    result = runner.run(suite)\n    \n    # Write test result to file\n    with open(\'test_bool.txt\', \'w\') as f:\n        if result.wasSuccessful():\n            f.write(\'PASSED\')\n        else:\n            f.write(\'FAILED\')', 'tests/run_tests.sh': '#!/bin/bash\n# Test runner that sets PYTHONPATH and runs tests\ncd "$(dirname "$0")"\nsource venv/bin/activate\nPYTHONPATH="$(dirname "$0")/.." python3 test.py\nPYTHONPATH="$(dirname "$0")/.." python3 test_blind.py\n'}
+
+├── (V) (18) README_API_SIGNATURE.md, content="# API Signature
+
+`add(a: float, b: float) -> float` - Adds two numbers together and returns the result.
+
+"
+├── (V) (11) README_tests.md, content="# Running Tests
+
+```bash
+cd tests
+bash setup.sh
+bash run_tests.sh
+```
+"
+├── (V) (32) src/
+│   ├── (V) (0) __init__.py, content=""
+│   └── (V) (32) calculator.py, content="def add(a: float, b: float) -> float:
+    """Add two numbers together.
+    
+    Args:
+        a: The first number.
+        b: The second number.
+    
+    Returns:
+        The sum of a and b.
+    """
+    return a + b
+"
+└── (V) (281) tests/
+    ├── (V) (0) requirements.txt, content=""
+    ├── (V) (23) run_tests.sh, content="#!/bin/bash
+# Test runner that sets PYTHONPATH and runs tests
+cd "$(dirname "$0")"
+source venv/bin/activate
+PYTHONPATH="$(dirname "$0")/.." python3 test.py
+PYTHONPATH="$(dirname "$0")/.." python3 test_blind.py
+"
+    ├── (V) (40) setup.sh, content="#!/bin/bash
+# Make python env, install requirements, set PYTHONPATH in venv activation
+cd "$(dirname "$0")"
+python3 -m venv venv
+source venv/bin/activate
+if [ -s requirements.txt ]; then
+    pip install -r requirements.txt
+fi
+echo 'export PYTHONPATH="${PYTHONPATH}:$(cd .. && pwd)"' >> venv/bin/activate
+"
+    ├── (V) (104) test.py, content="import unittest
+from src.calculator import add
+
+
+class TestCalculator(unittest.TestCase):
+    """Test cases for the calculator add function."""
+    
+    def test_add_positive_numbers(self):
+        """Test adding two positive numbers."""
+        self.assertEqual(add(2, 3), 5)
+    
+    def test_add_negative_numbers(self):
+        """Test adding two negative numbers."""
+        self.assertEqual(add(-2, -3), -5)
+    
+    def test_add_mixed_numbers(self):
+        """Test adding a positive and negative number."""
+        self.assertEqual(add(-2, 3), 1)
+    
+    def test_add_zeros(self):
+        """Test adding zeros."""
+        self.assertEqual(add(0, 0), 0)
+    
+    def test_add_floats(self):
+        """Test adding floating point numbers."""
+        self.assertAlmostEqual(add(1.5, 2.5), 4.0)
+
+
+if __name__ == '__main__':
+    # Create test suite and run tests
+    loader = unittest.TestLoader()
+    suite = loader.loadTestsFromTestCase(TestCalculator)
+    runner = unittest.TextTestRunner(verbosity=2)
+    result = runner.run(suite)
+    
+    # Write test result to file
+    with open('../replaytest_bool.txt', 'w') as f:
+        if result.wasSuccessful():
+            f.write('PASSED')
+        else:
+            f.write('FAILED')
+"
+    └── (V) (114) test_blind.py, content="import unittest
+from calculator import add
+
+class TestCalculator(unittest.TestCase):
+    """Test cases for calculator add function."""
+    
+    def test_add_positive_numbers(self):
+        """Test adding two positive numbers."""
+        self.assertEqual(add(2, 3), 5)
+    
+    def test_add_negative_numbers(self):
+        """Test adding two negative numbers."""
+        self.assertEqual(add(-2, -3), -5)
+    
+    def test_add_mixed_numbers(self):
+        """Test adding positive and negative numbers."""
+        self.assertEqual(add(-2, 3), 1)
+        self.assertEqual(add(2, -3), -1)
+    
+    def test_add_zeros(self):
+        """Test adding zeros."""
+        self.assertEqual(add(0, 0), 0)
+        self.assertEqual(add(5, 0), 5)
+        self.assertEqual(add(0, 5), 5)
+    
+    def test_add_floats(self):
+        """Test adding float numbers."""
+        self.assertAlmostEqual(add(1.5, 2.5), 4.0)
+        self.assertAlmostEqual(add(0.1, 0.2), 0.3, places=5)
+
+
+if __name__ == '__main__':
+    # Create test suite and run tests
+    loader = unittest.TestLoader()
+    suite = loader.loadTestsFromTestCase(TestCalculator)
+    runner = unittest.TextTestRunner(verbosity=2)
+    result = runner.run(suite)
+    
+    # Write test result to file
+    with open('test_bool.txt', 'w') as f:
+        if result.wasSuccessful():
+            f.write('PASSED')
+        else:
+            f.write('FAILED')"
+
+==================================================
+Step 7: Store Code & Run the tests...
+==================================================
+
+├── README_API_SIGNATURE.md
+├── README_tests.md
+├── replay/
+├── src/
+│   ├── __init__.py
+│   └── calculator.py
+└── tests/
+    ├── requirements.txt
+    ├── run_tests.sh
+    ├── setup.sh
+    ├── test.py
+    └── test_blind.py
+Stored files to: /Users/jvasiljevic/continue/gh/design-patterns/design_patterns/tools/tool_4/code_gen/simple_calculator

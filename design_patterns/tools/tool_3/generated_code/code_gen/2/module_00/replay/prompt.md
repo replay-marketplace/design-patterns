@@ -1,0 +1,1 @@
+calculate(a: int, b: int, compute_type: str) -> int - compute_type can be 'add' or 'mult'

@@ -25,3 +25,4 @@ def search_and_delete(text: str, pattern: str) -> str:
     return text.replace(pattern, "")
 
 
+

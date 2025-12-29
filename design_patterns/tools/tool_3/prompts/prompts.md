@@ -193,12 +193,18 @@ Implement this in tool_3/src/code_gen/
 
 ## 5. Package_03 - Code Gen
 
-### User facing functions
-1. `code_gen(prompt: str, project_name: str, generated_code_dir_path: str) -> dir` - Code generation, returns the dir with the code
-1. `code_gen(prompt: str, project_name: str, generated_code_dir_path: str, template_dir_path: str)` - Code generation, uses the dir and the code in it as the initial starting point. 
+### Dir-Level Functions
+1. `code_gen_dir(prompt: str, generated_code_dir_path: str) -> Tuple[str, int, int]` - Code generation. It returns 1) path to the dir where it wrote into, 2) total input tokens, 3) total output tokens
+2. `code_gen_dir(prompt: str, generated_code_dir_path: str, template_dir_path: str) -> Tuple[str, int, int]` - Code generation. It loads in the files from template_dir_path and passes them as input. It returns 1) path to the dir where it wrote into, 2) total input tokens, 3) total output tokens
 
+#### Description
+User provides the prompt, and it uses the chat_agent_code_json() to generate code. 
 
-### Description
+### Project-Level functions
+1. `code_gen_project(prompt: str, project_name: str, generated_code_dir_path: str) -> Tuple[str, int, int]` - Code generation, returns the dir with the code
+1. `code_gen_project(prompt: str, project_name: str, generated_code_dir_path: str, template_dir_path: str) -> Tuple[str, int, int]` - Code generation, uses the dir and the code in it as the initial starting point. 
+
+#### Description
 User provides the prompt, and it uses the chat_agent_code_json() to generate code. 
 It stores all projects into a dir called code_gen, in a dir based on project_name. 
 When creating a new project dir, always initialize the latest_dir.txt so that you can increment it and generate multiple versions under the same project name. 

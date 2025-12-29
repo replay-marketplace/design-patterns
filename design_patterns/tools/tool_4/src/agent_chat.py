@@ -280,7 +280,7 @@ def chat_agent_code_json_anthropic(prompt: str) -> Tuple[str, int, int]:
         # Send chat completion request with system message
         message = client.messages.create(
             model="claude-opus-4-5-20251101",
-            max_tokens=4096,  # Higher max tokens for code generation
+            max_tokens=16000,  # Higher max tokens for code generation
             temperature=0.1,  # Low temperature for deterministic code generation
             system=system_message,
             messages=[

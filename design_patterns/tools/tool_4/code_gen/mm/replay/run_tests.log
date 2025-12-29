@@ -1,0 +1,46 @@
+test_3x3_multiplication (__main__.TestMatrixMultiplication.test_3x3_multiplication)
+Test multiplication of two 3x3 matrices. ... ok
+test_empty_matrix (__main__.TestMatrixMultiplication.test_empty_matrix)
+Test that empty matrices raise ValueError. ... ok
+test_float_values (__main__.TestMatrixMultiplication.test_float_values)
+Test multiplication with float values. ... ok
+test_identity_matrix (__main__.TestMatrixMultiplication.test_identity_matrix)
+Test multiplication with identity matrix. ... ok
+test_incompatible_dimensions (__main__.TestMatrixMultiplication.test_incompatible_dimensions)
+Test that incompatible dimensions raise ValueError. ... ok
+test_rectangular_matrices (__main__.TestMatrixMultiplication.test_rectangular_matrices)
+Test multiplication of rectangular matrices (2x3 * 3x2). ... ok
+test_simple_2x2_multiplication (__main__.TestMatrixMultiplication.test_simple_2x2_multiplication)
+Test multiplication of two 2x2 matrices. ... ok
+test_single_element_matrices (__main__.TestMatrixMultiplication.test_single_element_matrices)
+Test multiplication of 1x1 matrices. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+test_3x3_multiplication (__main__.TestMatrixMultiply.test_3x3_multiplication)
+Test 3x3 matrix multiplication. ... ok
+test_basic_2x2_multiplication (__main__.TestMatrixMultiply.test_basic_2x2_multiplication)
+Test basic 2x2 matrix multiplication. ... ok
+test_empty_matrix_raises_error (__main__.TestMatrixMultiply.test_empty_matrix_raises_error)
+Test that empty matrices raise ValueError. ... ok
+test_float_values (__main__.TestMatrixMultiply.test_float_values)
+Test matrix multiplication with float values. ... ok
+test_identity_matrix (__main__.TestMatrixMultiply.test_identity_matrix)
+Test multiplication with identity matrix. ... ok
+test_incompatible_dimensions_raises_error (__main__.TestMatrixMultiply.test_incompatible_dimensions_raises_error)
+Test that incompatible dimensions raise ValueError. ... ok
+test_negative_values (__main__.TestMatrixMultiply.test_negative_values)
+Test matrix multiplication with negative values. ... ok
+test_rectangular_matrices (__main__.TestMatrixMultiply.test_rectangular_matrices)
+Test multiplication of rectangular matrices (2x3 * 3x2). ... ok
+test_single_element_matrices (__main__.TestMatrixMultiply.test_single_element_matrices)
+Test 1x1 matrix multiplication. ... ok
+test_zero_matrix (__main__.TestMatrixMultiply.test_zero_matrix)
+Test multiplication with zero matrix. ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.000s
+
+OK

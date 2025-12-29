@@ -57,3 +57,4 @@ def count_words(dir: str, text: str = None) -> int:
     return total_words
 
 
+

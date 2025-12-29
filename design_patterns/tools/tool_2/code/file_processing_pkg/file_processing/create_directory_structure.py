@@ -69,3 +69,4 @@ def create_directory_structure(structure: dict) -> bool:
         return False
 
 
+

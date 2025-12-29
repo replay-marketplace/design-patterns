@@ -66,15 +66,85 @@ Pruning Methods:
 In src/dir_tree/tests/ edit the tests so that they print things to terminal when I run them, so I can inspect that this works. 
 
 
+# Print Dir Tree
 
+Edit the print_dir_tree() in dir_tree_class.py to have the functionality below. 
 # print_dir_tree()
-`print_dir_tree(words: bool, contents: bool) - prints the tree. 
+`print_dir_tree(words: bool, contents: bool, state: bool) - prints the tree.`
+Both input args are optional, and by default set to False. 
 If 'words' is set to True it prints the word count in front of file name. 
 If 'contents' is set to true it prints contents after file name. 
 
 ├── (200) dir_tree/
 │   ├── (100) README_API_SIGNATURE.md, content="..."
 │   ├── (100) main.py, content="..."
+
+Make sure to implement additional helper metho9ds for counting words in a file, and summing up the files to count the words in a dir. 
+
+
+
+# Add files to dir tree
+Add this method into dir_tree_class.py to have the functionality below. 
+`add_files_to_dir_tree(Dict) -> Node_dir`
+Adds files to an existing tree. 
+
+# Add a dir to dir_tree
+Add this method into dir_tree_class.py to have the functionality below. 
+`add_dir(name: str)`
+Adds an empty dir to dir_tree.
+
+
+
+Edit the print_dir_tree() in dir_tree_class.py to have the functionality below. 
+`print_dir_tree(words: bool, contents: bool, state: bool) - prints the tree.`
+If 'state' is set to true it prints the state before the name
+├── (V) dir_tree/
+│   ├── (R) README_API_SIGNATURE.md
+│   ├── (H) main.py
+
+V = visible
+R - read only
+H - hidden
+
+
+# Print Simple
+Add this method into dir_tree_class.py to have the functionality below. 
+`print_simple()` - just prints the attributtes of each node. 
+
+
+# Change Dir_Tree State
+Add this method into dir_tree_class.py to have the functionality below. 
+`change_dir_tree_state(state: State) -> int`
+This function changes the state of the entire dir_tree.
+Then it recursively goes and changes the state of all sub dirs and their files. 
+It counts the total number of states updated, for both files and dir, and returns that number. 
+
+
+
+
+
+# Change Dir State
+Add this method into dir_tree_class.py to have the functionality below. 
+`change_dir_state(path: str, state: State) -> int`
+This function finds the dir based on the path given, and it must be exact and entire path, and changes the state of this directory. 
+Then it recursively goes and changes the state of all sub dirs and their files. 
+It counts the total number of states updated, for both files and dir, and returns that number. 
+
+
+# Change File State
+Udpate this method into dir_tree_class.py to have the functionality below. 
+`change_file_state(path: str, state: State) -> int` - Updatrs file state and returns the number of updates performed. 
+This function finds the file based on the path given, and it must be exact and entire path, and changes the state of that one file. 
+Then it recursively goes up the directories and changes the state of all parent directories as well.
+If the file state is set to VISIBLE, all the parent dirs are need to also be changed to VISIBLE if they were previously HIDDEN. 
+Make sure that the total count of updates performed is done right - and you increment the count only a state is changed to different than it was before. 
+
+
+# Write Dir Tree files out into files
+Add this method into dir_tree_class.py to have the functionality below. 
+`store_files(output_dir: string) -> str` - Store files and their contents into the provided output dir and return the path where you stored it
+Only visible files are stored.
+If a *.sh file is stored, make sure to make it executable iwht "chmod +x ..."
 
 
 

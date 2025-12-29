@@ -1,0 +1,30 @@
+def calculate(num1: float, num2: float, operation: str) -> float:
+    """
+    Perform calculator operations on two numbers.
+    
+    Args:
+        num1: First number
+        num2: Second number
+        operation: Operation to perform ('add', 'sub', 'mult', 'div')
+    
+    Returns:
+        Result of the operation
+    
+    Raises:
+        ValueError: If operation is invalid or division by zero
+    """
+    operation = operation.lower()
+    
+    if operation == 'add':
+        return num1 + num2
+    elif operation == 'sub':
+        return num1 - num2
+    elif operation == 'mult':
+        return num1 * num2
+    elif operation == 'div':
+        if num2 == 0:
+            raise ValueError("Cannot divide by zero")
+        return num1 / num2
+    else:
+        raise ValueError("Invalid operation. Supported operations: 'add', 'sub', 'mult', 'div'")
+

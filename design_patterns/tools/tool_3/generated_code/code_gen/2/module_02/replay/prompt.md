@@ -1,0 +1,1 @@
+mult(a: int, b: int) -> int - Multiplication
