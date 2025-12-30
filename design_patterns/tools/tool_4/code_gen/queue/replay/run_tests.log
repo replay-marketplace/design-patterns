@@ -1,0 +1,56 @@
+test_dequeue_empty_queue_raises_error (__main__.TestQueue.test_dequeue_empty_queue_raises_error)
+Test that dequeue on empty queue raises IndexError. ... ok
+test_dequeue_returns_first_item (__main__.TestQueue.test_dequeue_returns_first_item)
+Test that dequeue returns the first item added (FIFO). ... ok
+test_enqueue_different_types (__main__.TestQueue.test_enqueue_different_types)
+Test enqueuing different data types. ... ok
+test_enqueue_multiple_items (__main__.TestQueue.test_enqueue_multiple_items)
+Test enqueuing multiple items. ... ok
+test_enqueue_single_item (__main__.TestQueue.test_enqueue_single_item)
+Test enqueuing a single item. ... ok
+test_front_empty_queue_raises_error (__main__.TestQueue.test_front_empty_queue_raises_error)
+Test that front on empty queue raises IndexError. ... ok
+test_front_returns_first_item_without_removing (__main__.TestQueue.test_front_returns_first_item_without_removing)
+Test that front returns first item without removing it. ... ok
+test_len_method (__main__.TestQueue.test_len_method)
+Test __len__ method works correctly. ... ok
+test_new_queue_is_empty (__main__.TestQueue.test_new_queue_is_empty)
+Test that a new queue is empty. ... ok
+test_size_after_operations (__main__.TestQueue.test_size_after_operations)
+Test size is correct after various operations. ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+OK
+test_create_empty_queue (__main__.TestQueue.test_create_empty_queue)
+Test creating a new empty queue. ... ok
+test_dequeue_empty_queue_raises_error (__main__.TestQueue.test_dequeue_empty_queue_raises_error)
+Test that dequeue on empty queue raises IndexError. ... ok
+test_dequeue_fifo_order (__main__.TestQueue.test_dequeue_fifo_order)
+Test that dequeue follows FIFO order. ... ok
+test_dequeue_single_item (__main__.TestQueue.test_dequeue_single_item)
+Test dequeuing a single item. ... ok
+test_enqueue_different_types (__main__.TestQueue.test_enqueue_different_types)
+Test enqueuing different types of items. ... ok
+test_enqueue_multiple_items (__main__.TestQueue.test_enqueue_multiple_items)
+Test enqueuing multiple items. ... ok
+test_enqueue_single_item (__main__.TestQueue.test_enqueue_single_item)
+Test enqueuing a single item. ... ok
+test_front_empty_queue_raises_error (__main__.TestQueue.test_front_empty_queue_raises_error)
+Test that front on empty queue raises IndexError. ... ok
+test_front_returns_first_item (__main__.TestQueue.test_front_returns_first_item)
+Test that front returns the first item without removing it. ... ok
+test_is_empty_on_empty_queue (__main__.TestQueue.test_is_empty_on_empty_queue)
+Test is_empty returns True for empty queue. ... ok
+test_is_empty_on_non_empty_queue (__main__.TestQueue.test_is_empty_on_non_empty_queue)
+Test is_empty returns False for non-empty queue. ... ok
+test_size_after_operations (__main__.TestQueue.test_size_after_operations)
+Test size after various operations. ... ok
+test_size_empty_queue (__main__.TestQueue.test_size_empty_queue)
+Test size returns 0 for empty queue. ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.000s
+
+OK

@@ -1,9 +1,8 @@
-
 import unittest
-from main import add
+from src.calculator import add
 
 class TestAddFunction(unittest.TestCase):
-    """Test cases for the add function."""
+    """Test cases for the add function from calculator module."""
     
     def test_add_positive_numbers(self):
         """Test adding two positive numbers."""
@@ -20,8 +19,8 @@ class TestAddFunction(unittest.TestCase):
         result = add(5.0, -3.0)
         self.assertEqual(result, 2.0)
     
-    def test_add_zero(self):
-        """Test adding zero to a number."""
+    def test_add_with_zero(self):
+        """Test adding with zero."""
         result = add(5.0, 0.0)
         self.assertEqual(result, 5.0)
     
@@ -31,7 +30,7 @@ class TestAddFunction(unittest.TestCase):
         self.assertEqual(result, 4.0)
     
     def test_add_returns_float(self):
-        """Test that add returns a float."""
+        """Test that add returns a float type."""
         result = add(1.0, 2.0)
         self.assertIsInstance(result, float)
 

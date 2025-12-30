@@ -1,0 +1,86 @@
+test_delete_from_beginning (__main__.TestLinkedList.test_delete_from_beginning)
+Test deleting from the beginning. ... ok
+test_delete_from_empty (__main__.TestLinkedList.test_delete_from_empty)
+Test deleting from an empty list. ... ok
+test_delete_from_end (__main__.TestLinkedList.test_delete_from_end)
+Test deleting from the end. ... ok
+test_delete_from_middle (__main__.TestLinkedList.test_delete_from_middle)
+Test deleting from the middle. ... ok
+test_delete_nonexistent (__main__.TestLinkedList.test_delete_nonexistent)
+Test deleting a value that doesn't exist. ... ok
+test_empty_list (__main__.TestLinkedList.test_empty_list)
+Test that a new list is empty. ... ok
+test_get_invalid_position (__main__.TestLinkedList.test_get_invalid_position)
+Test getting values at invalid positions. ... ok
+test_get_valid_position (__main__.TestLinkedList.test_get_valid_position)
+Test getting values at valid positions. ... ok
+test_insert_at_beginning (__main__.TestLinkedList.test_insert_at_beginning)
+Test inserting elements at the beginning. ... ok
+test_insert_at_end (__main__.TestLinkedList.test_insert_at_end)
+Test inserting elements at the end. ... ok
+test_insert_at_middle (__main__.TestLinkedList.test_insert_at_middle)
+Test inserting elements in the middle. ... ok
+test_insert_invalid_position (__main__.TestLinkedList.test_insert_invalid_position)
+Test inserting at invalid position raises error. ... ok
+test_len_method (__main__.TestLinkedList.test_len_method)
+Test the __len__ method. ... ok
+test_search_empty_list (__main__.TestLinkedList.test_search_empty_list)
+Test searching in an empty list. ... ok
+test_search_found (__main__.TestLinkedList.test_search_found)
+Test searching for existing values. ... ok
+test_search_not_found (__main__.TestLinkedList.test_search_not_found)
+Test searching for non-existing values. ... ok
+test_with_strings (__main__.TestLinkedList.test_with_strings)
+Test linked list with string values. ... ok
+test_node_creation (__main__.TestNode.test_node_creation)
+Test creating a node. ... ok
+test_node_linking (__main__.TestNode.test_node_linking)
+Test linking nodes together. ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.001s
+
+OK
+test_create_empty_linked_list (__main__.TestLinkedList.test_create_empty_linked_list)
+Test creating a new empty linked list. ... ok
+test_delete_existing_value (__main__.TestLinkedList.test_delete_existing_value)
+Test deleting an existing value. ... ok
+test_delete_first_occurrence (__main__.TestLinkedList.test_delete_first_occurrence)
+Test that delete removes only the first occurrence. ... ok
+test_delete_from_empty_list (__main__.TestLinkedList.test_delete_from_empty_list)
+Test deleting from an empty list. ... ok
+test_delete_head (__main__.TestLinkedList.test_delete_head)
+Test deleting the head element. ... ok
+test_delete_non_existing_value (__main__.TestLinkedList.test_delete_non_existing_value)
+Test deleting a non-existing value. ... ok
+test_get_valid_position (__main__.TestLinkedList.test_get_valid_position)
+Test getting value at valid positions. ... ok
+test_insert_at_beginning (__main__.TestLinkedList.test_insert_at_beginning)
+Test inserting at position 0. ... ok
+test_insert_at_end_default (__main__.TestLinkedList.test_insert_at_end_default)
+Test inserting values at the end (default behavior). ... ok
+test_insert_at_end_with_position (__main__.TestLinkedList.test_insert_at_end_with_position)
+Test inserting at the end using position. ... ok
+test_insert_at_position (__main__.TestLinkedList.test_insert_at_position)
+Test inserting values at specific positions. ... ok
+test_insert_various_types (__main__.TestLinkedList.test_insert_various_types)
+Test inserting various data types. ... ok
+test_search_empty_list (__main__.TestLinkedList.test_search_empty_list)
+Test searching in an empty list. ... ok
+test_search_existing_value (__main__.TestLinkedList.test_search_existing_value)
+Test searching for an existing value. ... ok
+test_search_non_existing_value (__main__.TestLinkedList.test_search_non_existing_value)
+Test searching for a non-existing value. ... ok
+test_size_after_operations (__main__.TestLinkedList.test_size_after_operations)
+Test size after various operations. ... ok
+test_size_empty_list (__main__.TestLinkedList.test_size_empty_list)
+Test size of empty list. ... ok
+test_to_list_empty (__main__.TestLinkedList.test_to_list_empty)
+Test to_list on empty linked list. ... ok
+test_to_list_with_elements (__main__.TestLinkedList.test_to_list_with_elements)
+Test to_list with elements. ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.000s
+
+OK

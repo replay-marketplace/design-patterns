@@ -22,9 +22,9 @@ Test adding two negative numbers. ... ok
 test_add_positive_numbers (__main__.TestAddFunction.test_add_positive_numbers)
 Test adding two positive numbers. ... ok
 test_add_returns_float (__main__.TestAddFunction.test_add_returns_float)
-Test that add returns a float. ... ok
-test_add_zero (__main__.TestAddFunction.test_add_zero)
-Test adding zero to a number. ... ok
+Test that add returns a float type. ... ok
+test_add_with_zero (__main__.TestAddFunction.test_add_with_zero)
+Test adding with zero. ... ok
 
 ----------------------------------------------------------------------
 Ran 6 tests in 0.000s

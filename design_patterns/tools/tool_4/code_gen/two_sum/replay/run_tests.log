@@ -1,0 +1,42 @@
+test_basic_case (__main__.TestTwoSum.test_basic_case)
+Test basic case with solution at beginning of array. ... ok
+test_large_numbers (__main__.TestTwoSum.test_large_numbers)
+Test case with large numbers. ... ok
+test_mixed_positive_negative (__main__.TestTwoSum.test_mixed_positive_negative)
+Test case with mixed positive and negative numbers. ... ok
+test_negative_numbers (__main__.TestTwoSum.test_negative_numbers)
+Test case with negative numbers. ... ok
+test_no_solution (__main__.TestTwoSum.test_no_solution)
+Test case where no solution exists. ... ok
+test_solution_at_end (__main__.TestTwoSum.test_solution_at_end)
+Test case where solution is at the end of array. ... ok
+test_two_elements (__main__.TestTwoSum.test_two_elements)
+Test case with only two elements. ... ok
+test_zero_target (__main__.TestTwoSum.test_zero_target)
+Test case where target is zero. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+test_example_case (__main__.TestTwoSum.test_example_case)
+Test the example from documentation. ... ok
+test_large_numbers (__main__.TestTwoSum.test_large_numbers)
+Test with large numbers. ... ok
+test_mixed_positive_negative (__main__.TestTwoSum.test_mixed_positive_negative)
+Test with mixed positive and negative numbers. ... ok
+test_negative_numbers (__main__.TestTwoSum.test_negative_numbers)
+Test with negative numbers in the list. ... ok
+test_no_solution (__main__.TestTwoSum.test_no_solution)
+Test when no solution exists. ... ok
+test_target_at_end (__main__.TestTwoSum.test_target_at_end)
+Test when target numbers are at the end of the list. ... ok
+test_two_elements (__main__.TestTwoSum.test_two_elements)
+Test with only two elements. ... ok
+test_zero_target (__main__.TestTwoSum.test_zero_target)
+Test with zero as target. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK

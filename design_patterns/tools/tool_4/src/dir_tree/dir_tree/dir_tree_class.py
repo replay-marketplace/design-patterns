@@ -11,6 +11,7 @@ class State(Enum):
     """State enum for files and directories."""
     VISIBLE = "visible"
     HIDDEN = "hidden"
+    VISIBLE_PATH = "visible_path"
 
 
 @dataclass
@@ -118,12 +119,14 @@ class DirTree:
             state: State enum value
             
         Returns:
-            Single letter abbreviation: V for visible, H for hidden
+            Single letter abbreviation: V for visible, H for hidden, P for visible_path
         """
         if state == State.VISIBLE:
             return "V"
         elif state == State.HIDDEN:
             return "H"
+        elif state == State.VISIBLE_PATH:
+            return "P"
         else:
             return "?"
     
@@ -323,7 +326,11 @@ class DirTree:
         # Add visible files from this directory
         for filename, file_obj in node.files.items():
             if file_obj.state != State.HIDDEN:
-                file_dict[file_obj.path] = file_obj.content
+                # If file has VISIBLE_PATH state, use placeholder content
+                if file_obj.state == State.VISIBLE_PATH:
+                    file_dict[file_obj.path] = "[HIDDEN FILE CONTENTS, DO NOT EDIT]"
+                else:
+                    file_dict[file_obj.path] = file_obj.content
         
         # Recursively process child directories
         for child_dir in node.children.values():
@@ -380,9 +387,12 @@ class DirTree:
     def _change_dir_state_recursive(self, node: Node_Dir, state: State) -> int:
         """Recursively change the state of a directory and all its subdirectories and files.
         
+        When the state is VISIBLE_PATH, all files in the directory and subdirectories
+        will also be set to VISIBLE_PATH state.
+        
         Args:
             node: Directory node to change state for
-            state: New state to set
+            state: New state to set (including VISIBLE_PATH which propagates to all files)
             
         Returns:
             Total number of states updated (directory + all subdirectories + all files)
@@ -406,6 +416,9 @@ class DirTree:
     
     def change_dir_state(self, path: str, state: State) -> int:
         """Find a directory by exact path and change its state, recursively updating all subdirectories and files.
+        
+        When setting a directory to VISIBLE_PATH state, the state propagates to all files
+        within that directory and its subdirectories as well.
         
         Args:
             path: Exact path to the directory (must match exactly)

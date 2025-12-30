@@ -1,0 +1,56 @@
+test_bfs_disconnected_graph (__main__.TestBFS.test_bfs_disconnected_graph)
+Test BFS on disconnected graph only visits reachable nodes. ... ok
+test_bfs_invalid_start (__main__.TestBFS.test_bfs_invalid_start)
+Test BFS raises error for invalid start node. ... ok
+test_bfs_numeric_nodes (__main__.TestBFS.test_bfs_numeric_nodes)
+Test BFS with numeric node identifiers. ... ok
+test_bfs_path_direct_neighbor (__main__.TestBFS.test_bfs_path_direct_neighbor)
+Test path to direct neighbor. ... ok
+test_bfs_path_invalid_end (__main__.TestBFS.test_bfs_path_invalid_end)
+Test path raises error for invalid end node. ... ok
+test_bfs_path_invalid_start (__main__.TestBFS.test_bfs_path_invalid_start)
+Test path raises error for invalid start node. ... ok
+test_bfs_path_no_path (__main__.TestBFS.test_bfs_path_no_path)
+Test path returns empty list when no path exists. ... ok
+test_bfs_path_same_node (__main__.TestBFS.test_bfs_path_same_node)
+Test path when start equals end. ... ok
+test_bfs_path_simple (__main__.TestBFS.test_bfs_path_simple)
+Test finding shortest path between two nodes. ... ok
+test_bfs_simple_graph (__main__.TestBFS.test_bfs_simple_graph)
+Test BFS traversal on a simple connected graph. ... ok
+test_bfs_single_node (__main__.TestBFS.test_bfs_single_node)
+Test BFS on single node graph. ... ok
+test_bfs_visits_all_reachable (__main__.TestBFS.test_bfs_visits_all_reachable)
+Test that BFS visits all reachable nodes. ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.000s
+
+OK
+test_bfs_disconnected_graph (__main__.TestBFS.test_bfs_disconnected_graph)
+Test BFS on disconnected graph only visits reachable nodes. ... ok
+test_bfs_linear_graph (__main__.TestBFS.test_bfs_linear_graph)
+Test BFS on a linear graph. ... ok
+test_bfs_path_direct_connection (__main__.TestBFS.test_bfs_path_direct_connection)
+Test BFS path finding with directly connected nodes. ... ok
+test_bfs_path_linear_graph (__main__.TestBFS.test_bfs_path_linear_graph)
+Test BFS path on linear graph. ... ok
+test_bfs_path_no_path_exists (__main__.TestBFS.test_bfs_path_no_path_exists)
+Test BFS path returns empty list when no path exists. ... ok
+test_bfs_path_returns_list (__main__.TestBFS.test_bfs_path_returns_list)
+Test that BFS path returns a list. ... ok
+test_bfs_path_same_node (__main__.TestBFS.test_bfs_path_same_node)
+Test BFS path when start equals end. ... ok
+test_bfs_path_shortest_path (__main__.TestBFS.test_bfs_path_shortest_path)
+Test that BFS finds the shortest path. ... ok
+test_bfs_returns_list (__main__.TestBFS.test_bfs_returns_list)
+Test that BFS returns a list. ... ok
+test_bfs_simple_graph (__main__.TestBFS.test_bfs_simple_graph)
+Test BFS traversal on a simple connected graph. ... ok
+test_bfs_single_node (__main__.TestBFS.test_bfs_single_node)
+Test BFS on a single node graph. ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.000s
+
+OK

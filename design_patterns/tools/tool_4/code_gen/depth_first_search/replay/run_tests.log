@@ -1,0 +1,48 @@
+test_cyclic_graph (__main__.TestDFS.test_cyclic_graph)
+Test DFS handles cycles correctly without infinite loop. ... ok
+test_disconnected_graph (__main__.TestDFS.test_disconnected_graph)
+Test DFS only visits reachable nodes. ... ok
+test_invalid_start_node (__main__.TestDFS.test_invalid_start_node)
+Test DFS raises error for invalid start node. ... ok
+test_iterative_cyclic_graph (__main__.TestDFS.test_iterative_cyclic_graph)
+Test iterative DFS handles cycles correctly. ... ok
+test_iterative_invalid_start (__main__.TestDFS.test_iterative_invalid_start)
+Test iterative DFS raises error for invalid start node. ... ok
+test_iterative_linear_graph (__main__.TestDFS.test_iterative_linear_graph)
+Test iterative DFS on a linear graph. ... ok
+test_linear_graph (__main__.TestDFS.test_linear_graph)
+Test DFS on a linear graph. ... ok
+test_numeric_nodes (__main__.TestDFS.test_numeric_nodes)
+Test DFS works with numeric node identifiers. ... ok
+test_single_node (__main__.TestDFS.test_single_node)
+Test DFS on a single node graph. ... ok
+test_tree_graph (__main__.TestDFS.test_tree_graph)
+Test DFS on a tree-like graph. ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+OK
+test_disconnected_start (__main__.TestDFS.test_disconnected_start)
+Test DFS starting from a node with no neighbors. ... ok
+test_example_from_readme (__main__.TestDFS.test_example_from_readme)
+Test the example provided in the API signature documentation. ... ok
+test_fully_connected_graph (__main__.TestDFS.test_fully_connected_graph)
+Test DFS on a fully connected graph. ... ok
+test_graph_with_cycle (__main__.TestDFS.test_graph_with_cycle)
+Test DFS on a graph with cycles (should not revisit nodes). ... ok
+test_linear_graph (__main__.TestDFS.test_linear_graph)
+Test DFS on a linear graph (chain). ... ok
+test_numeric_nodes (__main__.TestDFS.test_numeric_nodes)
+Test DFS with numeric node identifiers. ... ok
+test_returns_list (__main__.TestDFS.test_returns_list)
+Test that DFS returns a list type. ... ok
+test_single_node_graph (__main__.TestDFS.test_single_node_graph)
+Test DFS on a graph with a single node. ... ok
+test_with_provided_visited_set (__main__.TestDFS.test_with_provided_visited_set)
+Test DFS with a pre-populated visited set. ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.000s
+
+OK

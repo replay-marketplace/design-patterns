@@ -7,7 +7,7 @@ def add(a: float, b: float) -> float:
     Args:
         a: First number to add.
         b: Second number to add.
-        
+    
     Returns:
         The sum of a and b.
     """

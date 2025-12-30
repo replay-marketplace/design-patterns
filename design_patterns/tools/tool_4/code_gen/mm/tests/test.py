@@ -1,5 +1,10 @@
 import unittest
-from src.matrix import matrix_multiply
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src import matrix_multiply
 
 
 class TestMatrixMultiplication(unittest.TestCase):
@@ -13,48 +18,44 @@ class TestMatrixMultiplication(unittest.TestCase):
         result = matrix_multiply(matrix_a, matrix_b)
         self.assertEqual(result, expected)
     
-    def test_3x3_multiplication(self):
-        """Test multiplication of two 3x3 matrices."""
-        matrix_a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-        matrix_b = [[9, 8, 7], [6, 5, 4], [3, 2, 1]]
-        expected = [[30, 24, 18], [84, 69, 54], [138, 114, 90]]
-        result = matrix_multiply(matrix_a, matrix_b)
-        self.assertEqual(result, expected)
+    def test_identity_matrix(self):
+        """Test multiplication with identity matrix."""
+        matrix_a = [[1, 2], [3, 4]]
+        identity = [[1, 0], [0, 1]]
+        result = matrix_multiply(matrix_a, identity)
+        self.assertEqual(result, [[1.0, 2.0], [3.0, 4.0]])
     
-    def test_rectangular_matrices(self):
-        """Test multiplication of rectangular matrices (2x3 * 3x2)."""
+    def test_different_dimensions(self):
+        """Test multiplication of matrices with different dimensions (2x3 * 3x2)."""
         matrix_a = [[1, 2, 3], [4, 5, 6]]
         matrix_b = [[7, 8], [9, 10], [11, 12]]
         expected = [[58, 64], [139, 154]]
         result = matrix_multiply(matrix_a, matrix_b)
         self.assertEqual(result, expected)
     
-    def test_identity_matrix(self):
-        """Test multiplication with identity matrix."""
-        matrix_a = [[1, 2], [3, 4]]
-        identity = [[1, 0], [0, 1]]
-        result = matrix_multiply(matrix_a, identity)
-        self.assertEqual(result, [[1, 2], [3, 4]])
-    
     def test_single_element_matrices(self):
         """Test multiplication of 1x1 matrices."""
         matrix_a = [[5]]
         matrix_b = [[3]]
-        expected = [[15]]
         result = matrix_multiply(matrix_a, matrix_b)
-        self.assertEqual(result, expected)
+        self.assertEqual(result, [[15.0]])
     
     def test_incompatible_dimensions(self):
         """Test that incompatible dimensions raise ValueError."""
         matrix_a = [[1, 2], [3, 4]]
-        matrix_b = [[1, 2], [3, 4], [5, 6]]
+        matrix_b = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
         with self.assertRaises(ValueError):
             matrix_multiply(matrix_a, matrix_b)
     
-    def test_empty_matrix(self):
-        """Test that empty matrices raise ValueError."""
+    def test_empty_matrix_a(self):
+        """Test that empty matrix A raises ValueError."""
         with self.assertRaises(ValueError):
             matrix_multiply([], [[1, 2]])
+    
+    def test_empty_matrix_b(self):
+        """Test that empty matrix B raises ValueError."""
+        with self.assertRaises(ValueError):
+            matrix_multiply([[1, 2]], [])
     
     def test_float_values(self):
         """Test multiplication with float values."""
@@ -63,9 +64,20 @@ class TestMatrixMultiplication(unittest.TestCase):
         expected = [[3.0, 5.0], [7.0, 9.0]]
         result = matrix_multiply(matrix_a, matrix_b)
         self.assertEqual(result, expected)
+    
+    def test_3x3_multiplication(self):
+        """Test multiplication of two 3x3 matrices."""
+        matrix_a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+        matrix_b = [[9, 8, 7], [6, 5, 4], [3, 2, 1]]
+        expected = [[30, 24, 18], [84, 69, 54], [138, 114, 90]]
+        result = matrix_multiply(matrix_a, matrix_b)
+        self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':
+    # Create replay directory if it doesn't exist
+    os.makedirs('../replay', exist_ok=True)
+    
     # Create test suite and run tests
     loader = unittest.TestLoader()
     suite = loader.loadTestsFromTestCase(TestMatrixMultiplication)
@@ -73,8 +85,6 @@ if __name__ == '__main__':
     result = runner.run(suite)
     
     # Write test result to file
-    import os
-    os.makedirs('../replay', exist_ok=True)
     with open('../replay/test_bool.txt', 'w') as f:
         if result.wasSuccessful():
             f.write('PASSED')

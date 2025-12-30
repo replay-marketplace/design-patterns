@@ -1,0 +1,46 @@
+test_case_insensitive (__main__.TestPalindrome.test_case_insensitive)
+Test that palindrome check is case insensitive. ... ok
+test_empty_string (__main__.TestPalindrome.test_empty_string)
+Test empty string is a palindrome. ... ok
+test_not_palindrome (__main__.TestPalindrome.test_not_palindrome)
+Test strings that are not palindromes. ... ok
+test_numeric_palindrome (__main__.TestPalindrome.test_numeric_palindrome)
+Test numeric string palindromes. ... ok
+test_simple_palindrome (__main__.TestPalindrome.test_simple_palindrome)
+Test simple palindrome words. ... ok
+test_single_character (__main__.TestPalindrome.test_single_character)
+Test single character strings are palindromes. ... ok
+test_two_characters (__main__.TestPalindrome.test_two_characters)
+Test two character strings. ... ok
+test_with_spaces_and_punctuation (__main__.TestPalindrome.test_with_spaces_and_punctuation)
+Test palindromes with spaces and punctuation. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
+test_empty_string (__main__.TestIsPalindrome.test_empty_string)
+Test empty string is a palindrome. ... ok
+test_even_length_non_palindrome (__main__.TestIsPalindrome.test_even_length_non_palindrome)
+Test even length non-palindrome. ... ok
+test_even_length_palindrome (__main__.TestIsPalindrome.test_even_length_palindrome)
+Test even length palindrome. ... ok
+test_longer_palindrome (__main__.TestIsPalindrome.test_longer_palindrome)
+Test longer palindrome string. ... ok
+test_palindrome_with_spaces (__main__.TestIsPalindrome.test_palindrome_with_spaces)
+Test palindrome with spaces (exact match). ... ok
+test_simple_non_palindrome (__main__.TestIsPalindrome.test_simple_non_palindrome)
+Test simple non-palindrome string. ... ok
+test_simple_palindrome (__main__.TestIsPalindrome.test_simple_palindrome)
+Test simple palindrome string. ... ok
+test_single_character (__main__.TestIsPalindrome.test_single_character)
+Test single character is a palindrome. ... ok
+test_two_different_characters (__main__.TestIsPalindrome.test_two_different_characters)
+Test two different characters is not a palindrome. ... ok
+test_two_same_characters (__main__.TestIsPalindrome.test_two_same_characters)
+Test two same characters is a palindrome. ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.000s
+
+OK

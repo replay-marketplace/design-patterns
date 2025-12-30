@@ -1,0 +1,50 @@
+test_all_elements_from_first_smaller (__main__.TestMergeSortedArrays.test_all_elements_from_first_smaller)
+Test when all elements in first array are smaller. ... ok
+test_all_elements_from_second_smaller (__main__.TestMergeSortedArrays.test_all_elements_from_second_smaller)
+Test when all elements in second array are smaller. ... ok
+test_basic_merge (__main__.TestMergeSortedArrays.test_basic_merge)
+Test merging two basic sorted arrays. ... ok
+test_both_empty_arrays (__main__.TestMergeSortedArrays.test_both_empty_arrays)
+Test merging two empty arrays. ... ok
+test_different_length_arrays (__main__.TestMergeSortedArrays.test_different_length_arrays)
+Test merging arrays of different lengths. ... ok
+test_duplicate_elements (__main__.TestMergeSortedArrays.test_duplicate_elements)
+Test merging arrays with duplicate elements. ... ok
+test_empty_first_array (__main__.TestMergeSortedArrays.test_empty_first_array)
+Test merging when first array is empty. ... ok
+test_empty_second_array (__main__.TestMergeSortedArrays.test_empty_second_array)
+Test merging when second array is empty. ... ok
+test_negative_numbers (__main__.TestMergeSortedArrays.test_negative_numbers)
+Test merging arrays with negative numbers. ... ok
+test_single_element_arrays (__main__.TestMergeSortedArrays.test_single_element_arrays)
+Test merging single element arrays. ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.000s
+
+OK
+test_all_elements_from_first_smaller (__main__.TestMergeSortedArrays.test_all_elements_from_first_smaller)
+Test when all elements from first array are smaller. ... ok
+test_all_elements_from_second_smaller (__main__.TestMergeSortedArrays.test_all_elements_from_second_smaller)
+Test when all elements from second array are smaller. ... ok
+test_basic_merge (__main__.TestMergeSortedArrays.test_basic_merge)
+Test basic merge of two sorted arrays. ... ok
+test_both_empty_arrays (__main__.TestMergeSortedArrays.test_both_empty_arrays)
+Test merge when both arrays are empty. ... ok
+test_different_length_arrays (__main__.TestMergeSortedArrays.test_different_length_arrays)
+Test merge of arrays with different lengths. ... ok
+test_duplicate_elements (__main__.TestMergeSortedArrays.test_duplicate_elements)
+Test merge with duplicate elements. ... ok
+test_empty_first_array (__main__.TestMergeSortedArrays.test_empty_first_array)
+Test merge when first array is empty. ... ok
+test_empty_second_array (__main__.TestMergeSortedArrays.test_empty_second_array)
+Test merge when second array is empty. ... ok
+test_negative_numbers (__main__.TestMergeSortedArrays.test_negative_numbers)
+Test merge with negative numbers. ... ok
+test_single_element_arrays (__main__.TestMergeSortedArrays.test_single_element_arrays)
+Test merge of single element arrays. ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.006s
+
+OK

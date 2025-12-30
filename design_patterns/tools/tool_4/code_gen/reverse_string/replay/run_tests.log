@@ -1,0 +1,38 @@
+test_empty_string (__main__.TestReverseString.test_empty_string)
+Test reversing an empty string. ... ok
+test_palindrome (__main__.TestReverseString.test_palindrome)
+Test reversing a palindrome. ... ok
+test_simple_string (__main__.TestReverseString.test_simple_string)
+Test reversing a simple string. ... ok
+test_single_character (__main__.TestReverseString.test_single_character)
+Test reversing a single character string. ... ok
+test_string_with_numbers (__main__.TestReverseString.test_string_with_numbers)
+Test reversing a string containing numbers. ... ok
+test_string_with_spaces (__main__.TestReverseString.test_string_with_spaces)
+Test reversing a string with spaces. ... ok
+test_string_with_special_characters (__main__.TestReverseString.test_string_with_special_characters)
+Test reversing a string with special characters. ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK
+test_empty_string (__main__.TestReverseString.test_empty_string)
+Test reversing an empty string. ... ok
+test_palindrome (__main__.TestReverseString.test_palindrome)
+Test reversing a palindrome. ... ok
+test_simple_string (__main__.TestReverseString.test_simple_string)
+Test reversing a simple string. ... ok
+test_single_character (__main__.TestReverseString.test_single_character)
+Test reversing a single character string. ... ok
+test_string_with_numbers (__main__.TestReverseString.test_string_with_numbers)
+Test reversing a string containing numbers. ... ok
+test_string_with_spaces (__main__.TestReverseString.test_string_with_spaces)
+Test reversing a string with spaces. ... ok
+test_string_with_special_characters (__main__.TestReverseString.test_string_with_special_characters)
+Test reversing a string with special characters. ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK

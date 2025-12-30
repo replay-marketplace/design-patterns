@@ -1,0 +1,66 @@
+test_is_empty_after_push_and_pop (__main__.TestStack.test_is_empty_after_push_and_pop)
+Test is_empty after pushing and popping all items. ... ok
+test_len_method (__main__.TestStack.test_len_method)
+Test the __len__ method. ... ok
+test_new_stack_is_empty (__main__.TestStack.test_new_stack_is_empty)
+Test that a newly created stack is empty. ... ok
+test_peek_empty_stack_raises_error (__main__.TestStack.test_peek_empty_stack_raises_error)
+Test that peeking at empty stack raises IndexError. ... ok
+test_peek_returns_top_without_removing (__main__.TestStack.test_peek_returns_top_without_removing)
+Test that peek returns top item without removing it. ... ok
+test_pop_empty_stack_raises_error (__main__.TestStack.test_pop_empty_stack_raises_error)
+Test that popping from empty stack raises IndexError. ... ok
+test_pop_reduces_size (__main__.TestStack.test_pop_reduces_size)
+Test that pop reduces the stack size. ... ok
+test_pop_returns_last_pushed_item (__main__.TestStack.test_pop_returns_last_pushed_item)
+Test that pop returns the last pushed item (LIFO). ... ok
+test_push_different_types (__main__.TestStack.test_push_different_types)
+Test pushing different data types onto the stack. ... ok
+test_push_multiple_items (__main__.TestStack.test_push_multiple_items)
+Test pushing multiple items onto the stack. ... ok
+test_push_single_item (__main__.TestStack.test_push_single_item)
+Test pushing a single item onto the stack. ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.000s
+
+OK
+test_create_empty_stack (__main__.TestStack.test_create_empty_stack)
+Test that a new stack is created empty. ... ok
+test_is_empty_after_push (__main__.TestStack.test_is_empty_after_push)
+Test is_empty returns False after push. ... ok
+test_is_empty_after_push_and_pop (__main__.TestStack.test_is_empty_after_push_and_pop)
+Test is_empty returns True after pushing and popping all items. ... ok
+test_is_empty_on_new_stack (__main__.TestStack.test_is_empty_on_new_stack)
+Test is_empty returns True for new stack. ... ok
+test_lifo_order (__main__.TestStack.test_lifo_order)
+Test that stack follows LIFO order. ... ok
+test_peek_does_not_remove_item (__main__.TestStack.test_peek_does_not_remove_item)
+Test that peek does not remove the item. ... ok
+test_peek_empty_stack_raises_index_error (__main__.TestStack.test_peek_empty_stack_raises_index_error)
+Test that peek raises IndexError on empty stack. ... ok
+test_peek_returns_top_item (__main__.TestStack.test_peek_returns_top_item)
+Test that peek returns the top item. ... ok
+test_pop_empty_stack_raises_index_error (__main__.TestStack.test_pop_empty_stack_raises_index_error)
+Test that pop raises IndexError on empty stack. ... ok
+test_pop_removes_item (__main__.TestStack.test_pop_removes_item)
+Test that pop removes the item from stack. ... ok
+test_pop_returns_top_item (__main__.TestStack.test_pop_returns_top_item)
+Test that pop returns the top item. ... ok
+test_push_multiple_items (__main__.TestStack.test_push_multiple_items)
+Test pushing multiple items onto the stack. ... ok
+test_push_single_item (__main__.TestStack.test_push_single_item)
+Test pushing a single item onto the stack. ... ok
+test_push_various_types (__main__.TestStack.test_push_various_types)
+Test pushing various types of items. ... ok
+test_size_after_push_and_pop (__main__.TestStack.test_size_after_push_and_pop)
+Test size returns correct count after push and pop. ... ok
+test_size_after_pushes (__main__.TestStack.test_size_after_pushes)
+Test size returns correct count after pushes. ... ok
+test_size_on_new_stack (__main__.TestStack.test_size_on_new_stack)
+Test size returns 0 for new stack. ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.000s
+
+OK
