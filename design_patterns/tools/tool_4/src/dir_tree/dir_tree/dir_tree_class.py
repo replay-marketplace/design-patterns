@@ -60,16 +60,26 @@ class DirTree:
         # Add the file
         current.files[filename] = File(path=filepath, content=content, state=state)
     
-    def add_dir(self, name: str, state: State = State.VISIBLE) -> None:
+    def add_dir(self, name: str, state: State = State.VISIBLE, dir: Optional[str] = None) -> None:
         """Add an empty directory to the tree.
         
         Args:
             name: Directory name (if it contains '/', it's treated as a path)
             state: State of the directory (default: VISIBLE)
+            dir: Optional directory location inside which to add the new directory
         """
-        parts = [p for p in name.split('/') if p != ""]
-        
+        # Navigate to the parent directory if specified
         current = self.root
+        if dir is not None:
+            dir_parts = [p for p in dir.split('/') if p != ""]
+            for dir_name in dir_parts:
+                if dir_name not in current.children:
+                    dir_path = '/'.join([current.path, dir_name]).lstrip('/')
+                    current.children[dir_name] = Node_Dir(path=dir_path, state=State.VISIBLE)
+                current = current.children[dir_name]
+        
+        # Add the new directory
+        parts = [p for p in name.split('/') if p != ""]
         for dir_name in parts:
             if dir_name not in current.children:
                 dir_path = '/'.join([current.path, dir_name]).lstrip('/')
@@ -228,27 +238,42 @@ class DirTree:
         
         self._print_node(self.root, "", True, words, contents, state)
     
-    def json_to_tree(self, files: Union[List[Dict[str, str]], Dict[str, str]]) -> Node_Dir:
+    def json_to_tree(self, files: Union[List[Dict[str, str]], Dict[str, str]], dir: Optional[str] = None) -> Node_Dir:
         """Create tree from JSON list of files or dictionary of files and return root node.
         
         Args:
             files: Either:
                 - List[Dict[str, str]]: List of dicts with "path" and "contents"/"content" keys
                 - Dict[str, str]: Dictionary mapping file paths to file contents
+            dir: Optional directory location inside which to add all files
         """
         self.root = Node_Dir(path="", state=State.VISIBLE)
+        
+        # Helper function to prepend dir to filepath if dir is provided
+        def get_full_path(filepath: str) -> str:
+            if dir is not None:
+                # Remove leading/trailing slashes and join properly
+                dir_clean = dir.strip('/')
+                filepath_clean = filepath.lstrip('/')
+                if dir_clean:
+                    return '/'.join([dir_clean, filepath_clean])
+                else:
+                    return filepath_clean
+            return filepath
         
         # Handle dictionary format (path -> content)
         if isinstance(files, dict):
             for filepath, content in files.items():
-                self.add_file(filepath, content)
+                full_path = get_full_path(filepath)
+                self.add_file(full_path, content)
         # Handle list format (list of dicts with "path" and "contents"/"content")
         elif isinstance(files, list):
             for file_dict in files:
                 if isinstance(file_dict, dict):
                     filepath = file_dict.get("path", "")
                     content = file_dict.get("contents", file_dict.get("content", ""))
-                    self.add_file(filepath, content)
+                    full_path = get_full_path(filepath)
+                    self.add_file(full_path, content)
                 else:
                     raise ValueError(f"Expected dict in list, got {type(file_dict)}")
         else:
@@ -256,28 +281,43 @@ class DirTree:
         
         return self.root
     
-    def add_files_to_dir_tree(self, files: Union[List[Dict[str, str]], Dict[str, str]]) -> Node_Dir:
+    def add_files_to_dir_tree(self, files: Union[List[Dict[str, str]], Dict[str, str]], dir: Optional[str] = None) -> Node_Dir:
         """Add files to an existing tree without resetting it.
         
         Args:
             files: Either:
                 - List[Dict[str, str]]: List of dicts with "path" and "contents"/"content" keys
                 - Dict[str, str]: Dictionary mapping file paths to file contents
+            dir: Optional directory location inside which to add all files
                 
         Returns:
             The root Node_Dir of the tree
         """
+        # Helper function to prepend dir to filepath if dir is provided
+        def get_full_path(filepath: str) -> str:
+            if dir is not None:
+                # Remove leading/trailing slashes and join properly
+                dir_clean = dir.strip('/')
+                filepath_clean = filepath.lstrip('/')
+                if dir_clean:
+                    return '/'.join([dir_clean, filepath_clean])
+                else:
+                    return filepath_clean
+            return filepath
+        
         # Handle dictionary format (path -> content)
         if isinstance(files, dict):
             for filepath, content in files.items():
-                self.add_file(filepath, content)
+                full_path = get_full_path(filepath)
+                self.add_file(full_path, content)
         # Handle list format (list of dicts with "path" and "contents"/"content")
         elif isinstance(files, list):
             for file_dict in files:
                 if isinstance(file_dict, dict):
                     filepath = file_dict.get("path", "")
                     content = file_dict.get("contents", file_dict.get("content", ""))
-                    self.add_file(filepath, content)
+                    full_path = get_full_path(filepath)
+                    self.add_file(full_path, content)
                 else:
                     raise ValueError(f"Expected dict in list, got {type(file_dict)}")
         else:
@@ -336,11 +376,48 @@ class DirTree:
         for child_dir in node.children.values():
             self._generate_file_dict_recursive(child_dir, file_dict)
     
-    def generate_file_dict(self) -> Dict[str, str]:
+    def generate_file_dict(self, dir: Optional[str] = None) -> Dict[str, str]:
         """Generate a dictionary with files. Does not include files set to HIDDEN, 
-        or anything within a dir that's set to HIDDEN."""
+        or anything within a dir that's set to HIDDEN.
+        
+        Args:
+            dir: Optional directory path. If provided, only generates files from this
+                 directory and its subdirectories. If None, generates files from the
+                 entire tree starting from root.
+                 
+        Returns:
+            Dictionary mapping file paths to file contents
+            
+        Raises:
+            ValueError: If the directory path does not exist
+        """
         file_dict = {}
-        self._generate_file_dict_recursive(self.root, file_dict)
+        
+        # If dir is provided, navigate to that directory
+        if dir is not None:
+            parts = [p for p in dir.split('/') if p != ""]
+            
+            # If empty path, use root
+            if not parts:
+                start_node = self.root
+            else:
+                # Navigate to the target directory
+                current = self.root
+                for dir_name in parts:
+                    if dir_name not in current.children:
+                        raise ValueError(f"Directory path '{dir}' does not exist")
+                    current = current.children[dir_name]
+                
+                # Verify the path matches exactly
+                if current.path != dir:
+                    raise ValueError(f"Directory path '{dir}' does not match exactly. Found path: '{current.path}'")
+                
+                start_node = current
+        else:
+            # No dir specified, start from root
+            start_node = self.root
+        
+        self._generate_file_dict_recursive(start_node, file_dict)
         return file_dict
     
     def _print_simple_recursive(self, node: Node_Dir) -> None:

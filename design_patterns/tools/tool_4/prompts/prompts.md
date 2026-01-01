@@ -55,7 +55,9 @@ Implement this in tool_4/src/agent_chat.py
 
 ### Description
 Use DeepSeek for the LLM agent. 
-
+`
+from deepseek import DeepSeekAPI
+`
 
 [
   {

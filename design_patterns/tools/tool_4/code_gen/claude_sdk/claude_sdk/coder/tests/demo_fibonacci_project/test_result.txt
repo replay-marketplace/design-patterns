@@ -1,0 +1,3 @@
+Test Result: FAILED
+
+/Users/jvasiljevic/continue/gh/design-patterns/design_patterns/tools/tool_4/code_gen/claude_sdk/claude_sdk/coder/tests/venv/bin/python: No module named pytest
