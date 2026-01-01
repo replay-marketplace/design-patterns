@@ -19,8 +19,6 @@ from src.dir_tree.dir_tree import DirTree, Node_Dir, File, State
 from src.project_tree.project_tree import ProjectTree, ProjectNode
 from src.agent_chat import chat_agent_code_json, chat_agent_code_json_anthropic
 
-import asyncio
-from claude_agent_sdk import query, ClaudeAgentOptions
 
 # ========================================================
 # Helper Functions
@@ -634,19 +632,81 @@ asyncio.run(main())
 
     '''
 
+'''
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
 
 async def main():
     async for message in query(
         prompt="""
-        In /Users/jvasiljevic/continue/gh/design-patterns/design_patterns/tools/tool_4/code_gen/ make a new dir called claude_project_03/.
-        Implement a python hello world program.
-        Commit it to github. 
+        This is a new repo. Edit the readme.md file to say "Hello, World!"
+        git commit and push the changes. 
         """,
-        options=ClaudeAgentOptions(allowed_tools=["Read", "Edit", "Bash", "Write"])
+        options=ClaudeAgentOptions(
+            allowed_tools=["Read", "Edit", "Bash", "Write"],
+            cwd="/Users/jvasiljevic/continue/gh/module0"
+            )
     ):
         print(message)  # Claude reads the file, finds the bug, edits it
 
 asyncio.run(main())
+'''
+
+import asyncio
+from claude_agent_sdk import (
+    ClaudeSDKClient, ClaudeAgentOptions,
+    AssistantMessage, TextBlock
+)
+
+async def get_response(client, prompt):
+    """Send prompt, return text response."""
+    await client.query(prompt)
+    response = ""
+    async for message in client.receive_response():
+        if isinstance(message, AssistantMessage):
+            for block in message.content:
+                if isinstance(block, TextBlock):
+                    response += block.text
+    return response
+
+async def main():
+    # Agent 1: A code reviewer
+    agent1_options = ClaudeAgentOptions(
+        system_prompt="You are a strict code reviewer. Point out issues and suggest improvements. Keep responses brief.",
+        allowed_tools=["Read", "Edit", "Bash", "Write"],
+        cwd="/Users/jvasiljevic/continue/gh/design-patterns/design_patterns/tools/tool_4/code_gen"
+    )
+
+    # Agent 2: A developer who responds to feedback
+    agent2_options = ClaudeAgentOptions(
+        system_prompt="You are a developer receiving code review feedback. Respond to critiques and explain your reasoning. Keep responses brief.",
+        allowed_tools=["Read", "Edit", "Bash", "Write"],
+        cwd="/Users/jvasiljevic/continue/gh/design-patterns/design_patterns/tools/tool_4/code_gen"
+    )
+
+    async with ClaudeSDKClient(agent1_options) as reviewer, \
+               ClaudeSDKClient(agent2_options) as developer:
+
+        # Start the conversation
+        message = "Review this code: def add(a,b): return a+b"
+        
+        for round in range(3):  # 3 back-and-forth exchanges
+            print(f"\n--- Round {round + 1} ---")
+            
+            # Reviewer speaks
+            review = await get_response(reviewer, message)
+            print(f"🔍 Reviewer: {review[:500]}")
+            
+            # Developer responds
+            message = await get_response(developer, f"Code review feedback: {review}")
+            print(f"💻 Developer: {message[:500]}")
+
+asyncio.run(main())
+
+
+
+
+
 
 '''
 # Example: Access node attributes
